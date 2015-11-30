@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="top" id="hRz-Ap-Jma"/>
                         <viewControllerLayoutGuide type="bottom" id="SJe-xn-2pi"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7s3-FZ-Xt1">
+                    <view key="view" contentMode="scaleToFill" id="7s3-FZ-Xt1" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>

@@ -17,9 +17,8 @@
 		7D9333461C0C59EF007F7861 /* Connect_Four_AdvanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333451C0C59EF007F7861 /* Connect_Four_AdvanceTests.swift */; };
 		7D9333511C0C59EF007F7861 /* Connect_Four_AdvanceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333501C0C59EF007F7861 /* Connect_Four_AdvanceUITests.swift */; };
 		7D93335F1C0C5B5D007F7861 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D93335E1C0C5B5D007F7861 /* MenuViewController.swift */; };
-		7D9333631C0C5DC3007F7861 /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333621C0C5DC3007F7861 /* SinglePlayerViewController.swift */; };
-		7D9333651C0C5DFC007F7861 /* SinglePlayerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D9333641C0C5DFC007F7861 /* SinglePlayerScene.sks */; };
-		7D9333681C0C5E9A007F7861 /* SinglePlayerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333671C0C5E9A007F7861 /* SinglePlayerScene.swift */; };
+		C2F409351C0C9B6D00A235A3 /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F409341C0C9B6D00A235A3 /* SinglePlayerViewController.swift */; };
+		C2F409371C0C9D8300A235A3 /* SinglePlayerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F409361C0C9D8300A235A3 /* SinglePlayerScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +55,8 @@
 		7D9333501C0C59EF007F7861 /* Connect_Four_AdvanceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect_Four_AdvanceUITests.swift; sourceTree = "<group>"; };
 		7D9333521C0C59EF007F7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D93335E1C0C5B5D007F7861 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		7D9333621C0C5DC3007F7861 /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayerViewController.swift; sourceTree = "<group>"; };
-		7D9333641C0C5DFC007F7861 /* SinglePlayerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SinglePlayerScene.sks; sourceTree = "<group>"; };
-		7D9333671C0C5E9A007F7861 /* SinglePlayerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayerScene.swift; sourceTree = "<group>"; };
+		C2F409341C0C9B6D00A235A3 /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayerViewController.swift; sourceTree = "<group>"; };
+		C2F409361C0C9D8300A235A3 /* SinglePlayerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayerScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,9 +140,8 @@
 		7D9333661C0C5E62007F7861 /* SinglePlayer */ = {
 			isa = PBXGroup;
 			children = (
-				7D9333621C0C5DC3007F7861 /* SinglePlayerViewController.swift */,
-				7D9333641C0C5DFC007F7861 /* SinglePlayerScene.sks */,
-				7D9333671C0C5E9A007F7861 /* SinglePlayerScene.swift */,
+				C2F409341C0C9B6D00A235A3 /* SinglePlayerViewController.swift */,
+				C2F409361C0C9D8300A235A3 /* SinglePlayerScene.swift */,
 			);
 			name = SinglePlayer;
 			sourceTree = "<group>";
@@ -269,7 +266,6 @@
 				7D93332F1C0C59EF007F7861 /* GameScene.sks in Resources */,
 				7D93333B1C0C59EF007F7861 /* LaunchScreen.storyboard in Resources */,
 				7D9333381C0C59EF007F7861 /* Assets.xcassets in Resources */,
-				7D9333651C0C5DFC007F7861 /* SinglePlayerScene.sks in Resources */,
 				7D9333361C0C59EF007F7861 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,8 +291,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D9333681C0C5E9A007F7861 /* SinglePlayerScene.swift in Sources */,
-				7D9333631C0C5DC3007F7861 /* SinglePlayerViewController.swift in Sources */,
+				C2F409371C0C9D8300A235A3 /* SinglePlayerScene.swift in Sources */,
+				C2F409351C0C9B6D00A235A3 /* SinglePlayerViewController.swift in Sources */,
 				7D9333311C0C59EF007F7861 /* GameScene.swift in Sources */,
 				7D9333331C0C59EF007F7861 /* GameViewController.swift in Sources */,
 				7D93332D1C0C59EF007F7861 /* AppDelegate.swift in Sources */,

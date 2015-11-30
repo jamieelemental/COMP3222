@@ -2,7 +2,7 @@
 //  SinglePlayerScene.swift
 //  Connect Four Advance
 //
-//  Created by J C C Element on 30/11/2015.
+//  Created by Daniel Nuttall on 30/11/2015.
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
