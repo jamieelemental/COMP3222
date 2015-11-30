@@ -11,7 +11,7 @@ import AVFoundation
 
 class SinglePlayerScene: SKScene {
     
-    // Create catogorys for elements of the scene
+    // Create catogorys for elements of the scene.
     let redCategoryName = "red"
     let blueCategoryName = "blue"
     let buttonFactoryCategoryName = "buttonFactory"
