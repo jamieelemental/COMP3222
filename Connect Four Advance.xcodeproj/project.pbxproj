@@ -17,7 +17,6 @@
 		7D9333461C0C59EF007F7861 /* Connect_Four_AdvanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333451C0C59EF007F7861 /* Connect_Four_AdvanceTests.swift */; };
 		7D9333511C0C59EF007F7861 /* Connect_Four_AdvanceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333501C0C59EF007F7861 /* Connect_Four_AdvanceUITests.swift */; };
 		7D93335F1C0C5B5D007F7861 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D93335E1C0C5B5D007F7861 /* MenuViewController.swift */; };
-		7D9333611C0C5C59007F7861 /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333601C0C5C59007F7861 /* NameViewController.swift */; };
 		7D9333631C0C5DC3007F7861 /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333621C0C5DC3007F7861 /* SinglePlayerViewController.swift */; };
 		7D9333651C0C5DFC007F7861 /* SinglePlayerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7D9333641C0C5DFC007F7861 /* SinglePlayerScene.sks */; };
 		7D9333681C0C5E9A007F7861 /* SinglePlayerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9333671C0C5E9A007F7861 /* SinglePlayerScene.swift */; };
@@ -57,7 +56,6 @@
 		7D9333501C0C59EF007F7861 /* Connect_Four_AdvanceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect_Four_AdvanceUITests.swift; sourceTree = "<group>"; };
 		7D9333521C0C59EF007F7861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D93335E1C0C5B5D007F7861 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		7D9333601C0C5C59007F7861 /* NameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameViewController.swift; path = ../NameViewController.swift; sourceTree = "<group>"; };
 		7D9333621C0C5DC3007F7861 /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayerViewController.swift; sourceTree = "<group>"; };
 		7D9333641C0C5DFC007F7861 /* SinglePlayerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SinglePlayerScene.sks; sourceTree = "<group>"; };
 		7D9333671C0C5E9A007F7861 /* SinglePlayerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayerScene.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			children = (
 				7D9333691C0C5F6C007F7861 /* TwoPlayer */,
 				7D9333661C0C5E62007F7861 /* SinglePlayer */,
-				7D9333601C0C5C59007F7861 /* NameViewController.swift */,
 				7D93332C1C0C59EF007F7861 /* AppDelegate.swift */,
 				7D9333341C0C59EF007F7861 /* Main.storyboard */,
 				7D93335E1C0C5B5D007F7861 /* MenuViewController.swift */,
@@ -304,7 +301,6 @@
 				7D9333331C0C59EF007F7861 /* GameViewController.swift in Sources */,
 				7D93332D1C0C59EF007F7861 /* AppDelegate.swift in Sources */,
 				7D93335F1C0C5B5D007F7861 /* MenuViewController.swift in Sources */,
-				7D9333611C0C5C59007F7861 /* NameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +529,7 @@
 				7D9333571C0C59EF007F7861 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D9333581C0C59EF007F7861 /* Build configuration list for PBXNativeTarget "Connect Four AdvanceTests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +538,7 @@
 				7D93335A1C0C59EF007F7861 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D93335B1C0C59EF007F7861 /* Build configuration list for PBXNativeTarget "Connect Four AdvanceUITests" */ = {
 			isa = XCConfigurationList;
@@ -549,6 +547,7 @@
 				7D93335D1C0C59EF007F7861 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

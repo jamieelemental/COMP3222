@@ -22,6 +22,8 @@ class MenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func hi(){}
+    
 
     /*
     // MARK: - Navigation

@@ -22,7 +22,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sgi-dU-WNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1360" y="188"/>
+            <point key="canvasLocation" x="633" y="266"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -41,7 +41,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1360" y="1070"/>
+            <point key="canvasLocation" x="633" y="938"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="U3d-6w-JIT">
@@ -54,32 +54,37 @@
                     <view key="view" contentMode="scaleToFill" id="nSK-Fb-7fi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8UH-RM-O2m">
+                                <rect key="frame" x="256" y="285" width="89" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Single Player"/>
+                                <connections>
+                                    <segue destination="E25-Bf-CDQ" kind="show" id="Q5L-XY-Aly"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0X6-3Z-uQY">
+                                <rect key="frame" x="263" y="323" width="75" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Two Player"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="VB8-Dc-jql"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8UH-RM-O2m" firstAttribute="centerX" secondItem="nSK-Fb-7fi" secondAttribute="centerX" id="Gyc-Eg-Vzd"/>
+                            <constraint firstItem="8UH-RM-O2m" firstAttribute="centerY" secondItem="nSK-Fb-7fi" secondAttribute="centerY" id="gxJ-sR-ka1"/>
+                            <constraint firstItem="8UH-RM-O2m" firstAttribute="centerX" secondItem="0X6-3Z-uQY" secondAttribute="centerX" id="sVg-8T-dcz"/>
+                            <constraint firstItem="0X6-3Z-uQY" firstAttribute="top" secondItem="8UH-RM-O2m" secondAttribute="bottom" constant="8" symbolic="YES" id="yyv-0m-hq2"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLu-ys-FZw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-209" y="644"/>
-        </scene>
-        <!--Name View Controller-->
-        <scene sceneID="hhS-9X-7hJ">
-            <objects>
-                <viewController id="19w-R1-3m9" customClass="NameViewController" customModule="Connect_Four_Advance" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eEc-Kp-X9H"/>
-                        <viewControllerLayoutGuide type="bottom" id="iEn-I4-nR3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8vW-9b-SMI">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gtB-bq-c4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="484" y="644"/>
         </scene>
     </scenes>
 </document>
