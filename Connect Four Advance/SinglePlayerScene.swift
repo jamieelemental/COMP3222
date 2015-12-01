@@ -25,8 +25,7 @@ class SinglePlayerScene: SKScene {
     var bgMusicPlayer = AVAudioPlayer()
     
     
-    override init(size: CGSize) {
-        super.init(size: size)
+    override func didMoveToView(view: SKView) {
         
         //let bgMusicURL = NSBundle.mainBundle().URLForResource("BGMusic", withExtension: "mp3")
         //bgMusicPlayer = AVAudioPlayer(contentsOfURL: bgMusicURL, error: nil)
@@ -97,12 +96,6 @@ class SinglePlayerScene: SKScene {
     }
     
     
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
 //    override func didMoveToView(view: SKView) {
 //        
 //    }
@@ -149,6 +142,11 @@ class SinglePlayerScene: SKScene {
                 alert.message = " Click to restart"
                 alert.addButtonWithTitle("Ok")
                 alert.show()
+                
+                var gameScene = SinglePlayerScene(size: self.size)
+                var transition = SKTransition.doorsCloseHorizontalWithDuration(0.5)
+                gameScene.scaleMode = SKSceneScaleMode.AspectFill
+                self.scene!.view?.presentScene(gameScene, transition: transition)
             }
             
         }
