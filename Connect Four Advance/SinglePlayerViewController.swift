@@ -19,7 +19,7 @@ class SinglePlayerViewController: UIViewController {
             skView.showsFPS = true
             skView.showsNodeCount = true
             skView.ignoresSiblingOrder = true
-            scene.scaleMode = .ResizeFill
+            scene.scaleMode = .AspectFill
             skView.presentScene(scene)
         }
     

@@ -32,12 +32,13 @@ class SinglePlayerScene: SKScene {
         //bgMusicPlayer = AVAudioPlayer(contentsOfURL: bgMusicURL, error: nil)
         
         
-        let backgroundImage = SKSpriteNode(imageNamed: "bg")
-        backgroundImage.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        self.addChild(backgroundImage)
+        //let backgroundImage = SKSpriteNode(imageNamed: "bg")
+        //backgroundImage.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
+        //self.addChild(backgroundImage)
+        self.backgroundColor = UIColor.darkGrayColor()
         
         // Control Gravity
-        self.physicsWorld.gravity = CGVectorMake(0, -1)
+        self.physicsWorld.gravity = CGVectorMake(0, -10)
         
         // set border of world
         let screenBorder = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -119,25 +120,27 @@ class SinglePlayerScene: SKScene {
             // Deal with button touches
             if valid.checkValid(name) == true
             {
-                var red = SKSpriteNode(imageNamed:"red")
+                let piece = SKSpriteNode()
+                let Node = SKShapeNode(circleOfRadius: 19.5)
                 if turn == 0 {
-                        red = SKSpriteNode(imageNamed:"blue")
+                        Node.fillColor = UIColor.blueColor()
                         turn = 1
                 } else if turn == 1{
-                        red = SKSpriteNode(imageNamed:"red")
+                        Node.fillColor = UIColor.redColor()
                         turn = 0
                 }
-                red.name = redCategoryName
-                red.position = positionInScene
-                red.size.width = CGFloat(39)
-                red.size.height = CGFloat(39)
-                red.zPosition = 1.0
+                piece.addChild(Node)
+                piece.name = redCategoryName
+                piece.position = positionInScene
+                piece.size.width = CGFloat(39)
+                piece.size.height = CGFloat(39)
+                piece.zPosition = 1.0
                 
-                red.physicsBody = SKPhysicsBody(circleOfRadius: red.frame.size.width/2)
-                red.physicsBody?.friction = 0
-                red.physicsBody?.restitution = 0.1
-                red.physicsBody?.allowsRotation = false
-                self.addChild(red)
+                piece.physicsBody = SKPhysicsBody(circleOfRadius: piece.frame.size.width/2)
+                piece.physicsBody?.friction = 0
+                piece.physicsBody?.restitution = 0.1
+                piece.physicsBody?.allowsRotation = false
+                self.addChild(piece)
                 moveCount++
                 print(moveCount)
             } else if moveCount == 36 {
