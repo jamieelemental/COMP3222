@@ -114,6 +114,7 @@ class SinglePlayerScene: SKScene {
             // Deal with button touches
             if valid.checkValid(name) == true
             {
+                // Check if User has won
                 game.hasWon(name, turn: turn)
                 let piece = SKSpriteNode()
                 let Node = SKShapeNode(circleOfRadius: 18)

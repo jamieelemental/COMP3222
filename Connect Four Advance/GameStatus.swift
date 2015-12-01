@@ -52,6 +52,35 @@ class GameStatus {
         default: break
             
         }
+        
+        // check col for win
+        func CheckCol(array: [Int]) -> Int
+        {
+            var prevItem = 10
+            var count = 1
+            
+            for item in array
+            {
+                if(prevItem == item)
+                {
+                    count++
+                } else if (prevItem != item) {
+                    count = 0
+                }
+                
+                prevItem = item
+            }
+            
+            return count
+        }
+        
+        print(CheckCol(array1))
+        print(CheckCol(array2))
+        print(CheckCol(array3))
+        print(CheckCol(array4))
+        print(CheckCol(array5))
+        print(CheckCol(array6))
+        print(CheckCol(array7))
 
         print(array1)
         print(array2)
