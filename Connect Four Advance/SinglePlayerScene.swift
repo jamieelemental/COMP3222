@@ -17,7 +17,6 @@ class SinglePlayerScene: SKScene {
     let buttonFactoryCategoryName = "buttonFactory"
     let wallCategoryName = "wall"
     var turn = 0
-    var red = SKSpriteNode(imageNamed:"red")
     // Create Music player
     var bgMusicPlayer = AVAudioPlayer()
     
@@ -62,6 +61,7 @@ class SinglePlayerScene: SKScene {
             wall.physicsBody?.allowsRotation
             wall.name = wallCategoryName
             wall.physicsBody?.dynamic = false
+            wall.zPosition = 1.0
             
             self.addChild(wall)
         
@@ -73,15 +73,9 @@ class SinglePlayerScene: SKScene {
     }
     
     
-    
-    
-    
 //    override func didMoveToView(view: SKView) {
 //        
 //    }
-    
-    
-    
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -89,19 +83,12 @@ class SinglePlayerScene: SKScene {
         
         for touch in touches {
             let location = touch.locationInNode(self)
-            //let red = SKShapeNode(circleOfRadius: 50)
-            //let colr = UIColor.yellowColor()
-            //red.fillColor = colr
-
-            //let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            //red.runAction(SKAction.repeatActionForever(action))
-            
+            var red = SKSpriteNode(imageNamed:"red")
             if turn == 0 {
-                red = SKSpriteNode(imageNamed: "blue")
+                red = SKSpriteNode(imageNamed:"blue")
                 turn = 1
             } else if turn == 1{
-                red = SKSpriteNode(imageNamed: "red")
+                red = SKSpriteNode(imageNamed:"red")
                 turn = 0
            }
             
@@ -109,12 +96,13 @@ class SinglePlayerScene: SKScene {
             red.position = location
             red.size.width = CGFloat(39)
             red.size.height = CGFloat(39)
+            red.zPosition = 1.0
             
-            self.addChild(red)
             red.physicsBody = SKPhysicsBody(circleOfRadius: red.frame.size.width/2)
             red.physicsBody?.friction = 0
             red.physicsBody?.restitution = 0.1
             red.physicsBody?.allowsRotation = false
+            self.addChild(red)
             
         }
     }
