@@ -17,6 +17,16 @@ class SinglePlayerScene: SKScene {
     let buttonFactoryCategoryName = "buttonFactory"
     let wallCategoryName = "wall"
     var turn = 0
+    var wallNumber = 1
+    // variables for storing button clicks
+    var b1Count = 0
+    var b2Count = 0
+    var b3Count = 0
+    var b4Count = 0
+    var b5Count = 0
+    var b6Count = 0
+    var b7Count = 0
+    
     // Create Music player
     var bgMusicPlayer = AVAudioPlayer()
     
@@ -77,7 +87,7 @@ class SinglePlayerScene: SKScene {
             
             //Ball Factory code
             let ballMaker = SKSpriteNode(imageNamed:"ball")
-            ballMaker.name = buttonFactoryCategoryName
+            ballMaker.name = buttonFactoryCategoryName + String(wallNumber)
             ballMaker.physicsBody?.allowsRotation = false
             ballMaker.physicsBody?.dynamic = false
             ballMaker.size.width = CGFloat(39)
@@ -86,6 +96,7 @@ class SinglePlayerScene: SKScene {
             ballMaker.zPosition = 1.0
             
             self.addChild(ballMaker)
+            wallNumber = wallNumber + 1
             
         }
         
@@ -113,8 +124,10 @@ class SinglePlayerScene: SKScene {
         
         if let name = touchedNode.name
         {
-            if name == "buttonFactory"
+            // Deal with button touches
+            if name == "buttonFactory1"||name == "buttonFactory2"||name == "buttonFactory3"||name == "buttonFactory4"||name == "buttonFactory5"||name == "buttonFactory6"||name == "buttonFactory7"
             {
+                print(name)
                 var red = SKSpriteNode(imageNamed:"red")
                 if turn == 0 {
                         red = SKSpriteNode(imageNamed:"blue")
