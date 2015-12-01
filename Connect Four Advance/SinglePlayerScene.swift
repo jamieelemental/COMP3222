@@ -16,6 +16,8 @@ class SinglePlayerScene: SKScene {
     let blueCategoryName = "blue"
     let buttonFactoryCategoryName = "buttonFactory"
     let wallCategoryName = "wall"
+    var turn = 0
+    var red = SKSpriteNode(imageNamed:"red")
     // Create Music player
     var bgMusicPlayer = AVAudioPlayer()
     
@@ -40,7 +42,6 @@ class SinglePlayerScene: SKScene {
         self.physicsBody?.friction = 1
         
         // Code to create columns.
-        //let rows = 1
         let walls = 7
         let wallWidth = SKSpriteNode(imageNamed: "wall").size.width
         let padding:Float = 40
@@ -88,14 +89,26 @@ class SinglePlayerScene: SKScene {
         
         for touch in touches {
             let location = touch.locationInNode(self)
-            
-            let red = SKSpriteNode(imageNamed: "blue")
-            red.name = redCategoryName
-            red.position = location
-            
+            //let red = SKShapeNode(circleOfRadius: 50)
+            //let colr = UIColor.yellowColor()
+            //red.fillColor = colr
+
             //let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
             
             //red.runAction(SKAction.repeatActionForever(action))
+            
+            if turn == 0 {
+                red = SKSpriteNode(imageNamed: "blue")
+                turn = 1
+            } else if turn == 1{
+                red = SKSpriteNode(imageNamed: "red")
+                turn = 0
+           }
+            
+            red.name = redCategoryName
+            red.position = location
+            red.size.width = CGFloat(39)
+            red.size.height = CGFloat(39)
             
             self.addChild(red)
             red.physicsBody = SKPhysicsBody(circleOfRadius: red.frame.size.width/2)
