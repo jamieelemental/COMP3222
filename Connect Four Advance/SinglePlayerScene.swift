@@ -16,9 +16,10 @@ class SinglePlayerScene: SKScene {
     let blueCategoryName = "blue"
     let buttonFactoryCategoryName = "buttonFactory"
     let wallCategoryName = "wall"
-    var turn = 0
+    var turn = 1
     var wallNumber = 1
     let valid = IsValidMove()
+    let game = GameStatus()
     var moveCount = 0
     
     // Create Music player
@@ -45,11 +46,11 @@ class SinglePlayerScene: SKScene {
         self.physicsBody?.friction = 1
         
         // Code to create columns.
-        let walls = 7
+        let walls = 8
         let wallWidth = SKSpriteNode(imageNamed: "wall").size.width
         let padding:Float = 40
         // Code to generate ball factorys
-        let ballFacts = 6
+        let ballFacts = 7
         
         
         // Generate the walls
@@ -113,38 +114,37 @@ class SinglePlayerScene: SKScene {
             // Deal with button touches
             if valid.checkValid(name) == true
             {
+                game.hasWon(name, turn: turn)
                 let piece = SKSpriteNode()
-                let Node = SKShapeNode(circleOfRadius: 19.5)
-                if turn == 0 {
+                let Node = SKShapeNode(circleOfRadius: 18)
+                if turn == 1 {
                         Node.fillColor = UIColor.blueColor()
-                        turn = 1
-                } else if turn == 1{
+                        turn = 2
+                } else if turn == 2{
                         Node.fillColor = UIColor.redColor()
-                        turn = 0
+                        turn = 1
                 }
                 piece.addChild(Node)
                 piece.name = redCategoryName
                 piece.position = positionInScene
-                piece.size.width = CGFloat(39)
-                piece.size.height = CGFloat(39)
                 piece.zPosition = 1.0
                 
-                piece.physicsBody = SKPhysicsBody(circleOfRadius: piece.frame.size.width/2)
+                piece.physicsBody = SKPhysicsBody(circleOfRadius: Node.frame.size.width/2)
                 piece.physicsBody?.friction = 0
                 piece.physicsBody?.restitution = 0.1
                 piece.physicsBody?.allowsRotation = false
                 self.addChild(piece)
                 moveCount++
                 print(moveCount)
-            } else if moveCount == 36 {
+            } else if moveCount == 42 {
                 let alert = UIAlertView()
                 alert.title = "GameOver"
                 alert.message = " Click to restart"
                 alert.addButtonWithTitle("Ok")
                 alert.show()
                 
-                var gameScene = SinglePlayerScene(size: self.size)
-                var transition = SKTransition.doorsCloseHorizontalWithDuration(0.5)
+                let gameScene = SinglePlayerScene(size: self.size)
+                let transition = SKTransition.doorsCloseHorizontalWithDuration(2.5)
                 gameScene.scaleMode = SKSceneScaleMode.AspectFill
                 self.scene!.view?.presentScene(gameScene, transition: transition)
             }
