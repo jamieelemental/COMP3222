@@ -19,6 +19,7 @@ class SinglePlayerScene: SKScene {
     var turn = 0
     var wallNumber = 1
     let valid = IsValidMove()
+    var moveCount = 0
     
     // Create Music player
     var bgMusicPlayer = AVAudioPlayer()
@@ -137,6 +138,14 @@ class SinglePlayerScene: SKScene {
                 red.physicsBody?.restitution = 0.1
                 red.physicsBody?.allowsRotation = false
                 self.addChild(red)
+                moveCount++
+                print(moveCount)
+            } else if moveCount == 36 {
+                let alert = UIAlertView()
+                alert.title = "GameOver"
+                alert.message = " Click to restart"
+                alert.addButtonWithTitle("Ok")
+                alert.show()
             }
             
         }
