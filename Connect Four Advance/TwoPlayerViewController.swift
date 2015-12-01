@@ -15,12 +15,14 @@ class TwoPlayerViewController: UIViewController {
         super.viewDidLoad()
         print("Two Player loaded")
         
-            let scene = TwoPlayerScene()
-            
+            let scene = TwoPlayerScene(size: view.bounds.size)
+    
+        
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
             skView.showsNodeCount = true
+        
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
@@ -52,3 +54,9 @@ class TwoPlayerViewController: UIViewController {
         return true
     }
 }
+
+
+
+
+
+
