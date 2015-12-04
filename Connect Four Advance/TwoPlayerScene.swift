@@ -75,12 +75,9 @@ class TwoPlayerScene: SKScene {
     func drawGrid()
     {
         
-        
         // Code to create columns.
         let walls = 8
         let padding:Float = 52
-        
-        
         
         // Generate the walls
         let offset:Float = (Float(self.frame.size.width) - (Float(10) * Float(walls) + padding * (Float(walls) - 1 ) ) ) / 2
@@ -91,30 +88,24 @@ class TwoPlayerScene: SKScene {
             
             let wallNode = SKShapeNode(rectOfSize: CGSize(width: (self.frame.width / 100), height: self.frame.size.height/2))
             wallNode.fillColor = UIColor.blueColor()
-            
-            
+    
             
             let wall = SKSpriteNode()
             
-            
             wall.physicsBody = SKPhysicsBody(rectangleOfSize: wallNode.frame.size)
-            
             wall.physicsBody?.friction = 0
             wall.physicsBody?.allowsRotation = false
             wall.physicsBody?.dynamic = false
             wall.zPosition = 1.0
             
-            
             //let calc1:Float = Float(index) - 0.5
             //let calc2:Float = Float(index) - 1
-            
             //wall.position = CGPointMake(CGFloat(calc1 * Float(wall.frame.size.width) + calc2 * padding + offset), 30)
             wall.position = CGPointMake( (CGFloat(offset) + CGFloat(index) * CGFloat(padding)), self.frame.height/2)
             
             
             wall.addChild(wallNode)
             self.addChild(wall)
-            
             
         }
         
@@ -124,29 +115,18 @@ class TwoPlayerScene: SKScene {
         let baseNode = SKShapeNode(rectOfSize: CGSize(width: width, height: self.frame.width/100))
         baseNode.fillColor = UIColor.blueColor()
         
-        
-        
         let base = SKSpriteNode()
         
-        
         base.physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.frame.size)
-        
         base.physicsBody?.friction = 0
         base.physicsBody?.allowsRotation = false
         base.physicsBody?.dynamic = false
         base.zPosition = 1.0
-        
         base.position = CGPointMake(self.frame.width/2 + CGFloat(self.frame.width/60),  self.frame.height/4)
         base.addChild(baseNode)
         
         self.addChild(base)
-        
-        
-        
-        
-        
     }
-    
 }
 
 
