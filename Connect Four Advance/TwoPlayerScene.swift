@@ -12,6 +12,7 @@ import SpriteKit
 class TwoPlayerScene: SKScene {
     
     var playerTurn = 0
+    var movesCount = 0
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -41,7 +42,7 @@ class TwoPlayerScene: SKScene {
         /* Called when a touch begins */
         
         for touch in touches {
-            
+            if movesCount < 35 {
             let location = touch.locationInNode(self)
             let sprite = SKSpriteNode()
             let Node = SKShapeNode(circleOfRadius: 19)
@@ -65,6 +66,8 @@ class TwoPlayerScene: SKScene {
             sprite.zPosition = 1.0
             
             self.addChild(sprite)
+            movesCount++
+            }
         }
     }
     
