@@ -35,38 +35,38 @@ class TwoPlayerScene: SKScene {
         self.backgroundColor = UIColor.whiteColor()
         drawGrid()
         
-        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         
         for touch in touches {
-            if movesCount < 35 {
-            let location = touch.locationInNode(self)
-            let sprite = SKSpriteNode()
-            let Node = SKShapeNode(circleOfRadius: 19)
-            
-            if playerTurn == 0 {
-                Node.fillColor = UIColor.yellowColor()
-                playerTurn = 1
-            }
+            if movesCount < 42 {
+                let location = touch.locationInNode(self)
+                let sprite = SKSpriteNode()
+                let Node = SKShapeNode(circleOfRadius: (self.frame.height/22)) //Make more scalable?
                 
-            else if playerTurn == 1{
-                Node.fillColor = UIColor.redColor()
-                playerTurn = 0
-            }
-            
-            sprite.addChild(Node)
-            sprite.position = location
-            sprite.physicsBody = SKPhysicsBody(circleOfRadius: Node.frame.size.width/2)
-            sprite.physicsBody?.friction = 0
-            sprite.physicsBody?.restitution = 0.1
-            sprite.physicsBody?.allowsRotation = false
-            sprite.zPosition = 1.0
-            
-            self.addChild(sprite)
-            movesCount++
+                
+                if playerTurn == 0 {
+                    Node.fillColor = UIColor.yellowColor()
+                    playerTurn = 1
+                }
+                    
+                else if playerTurn == 1{
+                    Node.fillColor = UIColor.redColor()
+                    playerTurn = 0
+                }
+                
+                sprite.addChild(Node)
+                sprite.position = location
+                sprite.physicsBody = SKPhysicsBody(circleOfRadius: Node.frame.width/2)
+                sprite.physicsBody?.friction = 0
+                sprite.physicsBody?.restitution = 0.1
+                sprite.physicsBody?.allowsRotation = false
+                sprite.zPosition = 1.0
+                
+                self.addChild(sprite)
+                movesCount++
             }
         }
     }
@@ -78,107 +78,116 @@ class TwoPlayerScene: SKScene {
     func drawGrid()
     {
         //Define some variables
-       
-        
-        
-        let lineWidth = self.frame.width / 100
-        let colHeight = (self.frame.height / 100) * 80 //The padding on each side is 15%, so the available space should be 70%
-        let rowWidth = colHeight // needs to be equal so we have a grid.
-        
-         //let paddingWidth = (self.frame.width / 100) * 15 //Change this to dynamic calculation.
-        
-        let paddingWidth = (self.frame.width - rowWidth) / 2
-        
-        
-        
-        
+        let gridLineWidth = self.frame.width / 100 //How thick the lines of the grid are.
+        let gridHeight = (self.frame.height / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
+        let gridWidth = gridHeight // needs to be equal so we have a grid.
+        let paddingSidesWidth = (self.frame.width - gridWidth) / 2
+        let paddingBottomHeight = (self.frame.height - gridHeight) / 2
+        let colWidth = gridWidth / 7
+
         
         //Left padding
-        let padd = SKShapeNode(rectOfSize: CGSize(width: paddingWidth, height: self.frame.height))
+        let padd = SKShapeNode(rectOfSize: CGSize(width: paddingSidesWidth, height: self.frame.height))
         
         padd.physicsBody = SKPhysicsBody(rectangleOfSize: padd.frame.size)
         padd.physicsBody?.friction = 0
         padd.physicsBody?.allowsRotation = false
         padd.physicsBody?.dynamic = false
         padd.zPosition = 1.0
-        padd.fillColor = UIColor.blackColor()
+        padd.fillColor = UIColor.whiteColor()
         padd.position = CGPointMake(padd.frame.width/2, self.frame.height/2)
+        
         self.addChild(padd)
         
         
-        //right padding
-        let padd2 = SKShapeNode(rectOfSize: CGSize(width: paddingWidth, height: self.frame.height))
+        //Right padding
+        let padd2 = SKShapeNode(rectOfSize: CGSize(width: paddingSidesWidth, height: self.frame.height))
         
         padd2.physicsBody = SKPhysicsBody(rectangleOfSize: padd2.frame.size)
         padd2.physicsBody?.friction = 0
         padd2.physicsBody?.allowsRotation = false
         padd2.physicsBody?.dynamic = false
         padd2.zPosition = 1.0
-        padd2.fillColor = UIColor.blackColor()
-        
+        padd2.fillColor = UIColor.whiteColor()
         padd2.position = CGPointMake( (self.frame.width - padd2.frame.width/2), self.frame.height/2)
         
         self.addChild(padd2)
         
         
         //Bottom padding
-        let padd3 = SKShapeNode(rectOfSize: CGSize(width: ((self.frame.width/100) * 100), height: (self.frame.height/100) * 15))
+        let padd3 = SKShapeNode(rectOfSize: CGSize(width: self.frame.width, height: paddingBottomHeight))
         
         padd3.physicsBody = SKPhysicsBody(rectangleOfSize: padd3.frame.size)
         padd3.physicsBody?.friction = 0
         padd3.physicsBody?.allowsRotation = false
         padd3.physicsBody?.dynamic = false
         padd3.zPosition = 1.0
-        padd3.fillColor = UIColor.blackColor()
-        
+        padd3.fillColor = UIColor.whiteColor()
         padd3.position = CGPointMake(self.frame.width/2, padd3.frame.height/2)
         
         self.addChild(padd3)
         
         
+        //Top padding
+        let padd4 = SKShapeNode(rectOfSize: CGSize(width: self.frame.width, height: paddingBottomHeight))
+        
+        padd4.physicsBody = SKPhysicsBody(rectangleOfSize: padd4.frame.size)
+        padd4.physicsBody?.friction = 0
+        padd4.physicsBody?.allowsRotation = false
+        padd4.physicsBody?.dynamic = false
+        padd4.zPosition = 1.0
+        padd4.fillColor = UIColor.whiteColor()
+        padd4.position = CGPointMake(self.frame.width/2, (self.frame.height - padd4.frame.height/2))
+        
+        self.addChild(padd4)
+
+        
+    
+        // Code to create columns.
+        let walls = 8
+    
+        for index in 1 ... walls {
+            
+            let wallNode = SKShapeNode(rectOfSize: CGSize(width: gridLineWidth, height: gridHeight))
+            
+            
+            wallNode.fillColor = UIColor.blueColor()
+            wallNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridLineWidth * 0.5, height: gridHeight))
+
+            wallNode.physicsBody?.friction = 0
+            wallNode.physicsBody?.allowsRotation = false
+            wallNode.physicsBody?.dynamic = false
+            wallNode.zPosition = 2.0
+            wallNode.position = CGPointMake(CGFloat(paddingSidesWidth) + CGFloat(index - 1) * CGFloat(colWidth), self.frame.height/2)
+            self.addChild(wallNode)
+            
+        }
+        
+        //Create bottom row, with physical body so cannot pass through
+        let rowNode = SKShapeNode(rectOfSize: CGSize(width: gridWidth, height: gridLineWidth))
+        
+        rowNode.fillColor = UIColor.blueColor()
+        rowNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridWidth, height: gridLineWidth * 0.5))
+        rowNode.physicsBody?.friction = 0
+        rowNode.physicsBody?.allowsRotation = false
+        rowNode.physicsBody?.dynamic = false
+        rowNode.zPosition = 1.0
+        rowNode.position = CGPointMake(self.frame.width/2, paddingBottomHeight)
+        self.addChild(rowNode)
         
         
+        //create rest of rows
         
-//        // Code to create columns.
-//        let walls = 8
-//        let padding:Float = (Float(self.frame.width/10)) //width of the walls
-//        
-//        // Generate the walls
-//        let offset:Float = Float(self.frame.width / 100 * 15) //Offset is the 15% padding
-//        
-//        for index in 1 ... walls {
-//            
-//            
-//            let wallNode = SKShapeNode(rectOfSize: CGSize(width: (self.frame.width/ 100)), height: (self.frame.size.height/100) * 70))
-//            wallNode.fillColor = UIColor.blueColor()
-//            
-//            wallNode.physicsBody = SKPhysicsBody(rectangleOfSize: wallNode.frame.size)
-//            wallNode.physicsBody?.friction = 0
-//            wallNode.physicsBody?.allowsRotation = false
-//            wallNode.physicsBody?.dynamic = false
-//            wallNode.zPosition = 1.0
-//            wallNode.position = CGPointMake(CGFloat(offset) + CGFloat(index - 1) * CGFloat(padding), self.frame.height/2)
-//            self.addChild(wallNode)
-//            
-//        }
-//
-//        
-//        //create bottom row, with physical body so cannot pass through
-//        let baseNode = SKShapeNode(rectOfSize: CGSize(width: self.frame.width / 100 * 70, height: self.frame.width/100))
-//        baseNode.fillColor = UIColor.blueColor()
-//        
-//        baseNode.physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.frame.size)
-//        baseNode.physicsBody?.friction = 0
-//        baseNode.physicsBody?.allowsRotation = false
-//        baseNode.physicsBody?.dynamic = false
-//        baseNode.zPosition = 1.0
-//        baseNode.position = CGPointMake(self.frame.width/2, (self.frame.height/100 * 15))
-//        
-//        self.addChild(baseNode)
-//        
-//        
-//        //create rest of rows
-        
+        for rowIndex in 1...walls - 2 {
+            
+            let otherRows = SKShapeNode(rectOfSize: CGSize(width: gridWidth, height: gridLineWidth))
+            
+            otherRows.fillColor = UIColor.blueColor()
+            otherRows.zPosition = 2.0
+            otherRows.position = CGPointMake(self.frame.width/2, CGFloat(paddingBottomHeight) + CGFloat(rowIndex) * CGFloat(colWidth))
+            
+            self.addChild(otherRows)
+        }
     }
 }
 
