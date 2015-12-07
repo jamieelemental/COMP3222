@@ -21,7 +21,6 @@ class TwoPlayerScene: SKScene {
         let screenBorder = SKPhysicsBody(edgeLoopFromRect: self.frame)
         self.physicsBody = screenBorder
         self.physicsBody?.friction = 1
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,23 +29,17 @@ class TwoPlayerScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         
-        print("Two player loaded")
         scaleMode = .ResizeFill
         self.backgroundColor = UIColor.whiteColor()
         drawGrid()
-        
     }
     
     func isValidMove(loc: CGPoint) -> Bool {
         
         var result = true
-        
-        //let gridLineWidth = self.frame.width / 100 //How thick the lines of the grid are.
         let gridHeight = (self.frame.height / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
         let gridWidth = gridHeight // needs to be equal so we have a grid.
         let paddingSidesWidth = (self.frame.width - gridWidth) / 2
-        //let paddingBottomHeight = (self.frame.height - gridHeight) / 2
-        //let colWidth = gridWidth / 7
         
         if movesCount >= 42 { result = false }
         if loc.x <= paddingSidesWidth { result = false }
@@ -54,6 +47,7 @@ class TwoPlayerScene: SKScene {
         
         return result
     }
+    
     
     func recordMove(pixel: CGPoint)
     {
@@ -66,7 +60,6 @@ class TwoPlayerScene: SKScene {
         else {
             print("failed")
         }
-        
     }
     
     
@@ -77,11 +70,8 @@ class TwoPlayerScene: SKScene {
             
             if isValidMove(touch.locationInNode(self)){
                 
-                
                 let location = CGPoint(x:touch.locationInNode(self).x, y:(self.frame.height/100 * 80)) //Take x co-ordinate for users input, change Y co-ordinate to the top of the column
-                
                 let Node = SKShapeNode(circleOfRadius: (self.frame.height/22)) //Make more scalable?
-                
                 
                 if playerTurn == 0 {
                     Node.fillColor = UIColor.yellowColor()
@@ -102,10 +92,8 @@ class TwoPlayerScene: SKScene {
                 
                 self.addChild(Node)
                 movesCount++
-
                 
                 recordMove(touch.locationInNode(self)) //Debug testing column inputs/ recording
-                
             }
         }
     }
@@ -124,7 +112,6 @@ class TwoPlayerScene: SKScene {
         let paddingSidesWidth = (self.frame.width - gridWidth) / 2
         let paddingBottomHeight = (self.frame.height - gridHeight) / 2
         let colWidth = gridWidth / 7
-        
 
         // Code to create columns
         for index in 1 ... 8 {
@@ -140,7 +127,6 @@ class TwoPlayerScene: SKScene {
             wallNode.position = CGPointMake(CGFloat(paddingSidesWidth) + CGFloat(index - 1) * CGFloat(colWidth), self.frame.height/2)
             
             self.addChild(wallNode)
-            
         }
         
         //Create bottom row, with physical body so cannot pass through
@@ -156,9 +142,7 @@ class TwoPlayerScene: SKScene {
         
         self.addChild(rowNode)
         
-        
-        //create rest of rows
-        
+        //Create rest of rows
         for rowIndex in 1...6 {
             
             let otherRows = SKShapeNode(rectOfSize: CGSize(width: gridWidth, height: gridLineWidth))
