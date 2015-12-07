@@ -12,8 +12,7 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view loaded")
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -21,9 +20,4 @@ class MenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func hi(){}
-    
-
-   
 }

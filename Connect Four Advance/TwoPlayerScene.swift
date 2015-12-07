@@ -15,13 +15,22 @@ class TwoPlayerScene: SKScene {
     var movesCount = 0
     var game = GameStatus()
     
+    var shortSide = CGFloat(0)
+    var longSide = CGFloat(0)
+    
     override init(size: CGSize) {
         super.init(size: size)
         
         self.physicsWorld.gravity = CGVectorMake(0, -8)
-        let screenBorder = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        self.physicsBody = screenBorder
-        self.physicsBody?.friction = 1
+        if self.frame.height < self.frame.width {
+            shortSide = self.frame.height
+            longSide = self.frame.width}
+        
+        if self.frame.width < self.frame.height {
+            shortSide = self.frame.width
+            longSide = self.frame.height
+        }
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,7 +49,8 @@ class TwoPlayerScene: SKScene {
     func isValidMove(loc: CGPoint) -> Bool {
         
         var result = true
-        let gridHeight = (self.frame.height / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
+    
+        let gridHeight = (shortSide/100) * 70 //The padding on each side is 15%, so the available space should be 70%
         let gridWidth = gridHeight // needs to be equal so we have a grid.
         let paddingSidesWidth = (self.frame.width - gridWidth) / 2
         
@@ -58,7 +68,7 @@ class TwoPlayerScene: SKScene {
         
         switch pixel.x
         {
-        case let x where x > self.frame.width/100 * 25 && x < self.frame.width/100 * 35 -  2 * (self.frame.width/100):
+        case let x where x > self.frame.width/100 * 15 && x < self.frame.width/100 * 25 -  2 * (self.frame.height/100):
             return "buttonFactory1"
         default:
             return "failed"
@@ -75,8 +85,8 @@ class TwoPlayerScene: SKScene {
             
             if isValidMove(touch.locationInNode(self)){
                 
-                let location = CGPoint(x:touch.locationInNode(self).x, y:(self.frame.height/100 * 80)) //Take x co-ordinate for users input, change Y co-ordinate to the top of the column
-                let Node = SKShapeNode(circleOfRadius: (self.frame.height/20.7)) //Make more scalable?
+                let location = CGPoint(x:touch.locationInNode(self).x, y:(self.frame.height/100 * 70)) //Take x co-ordinate for users input, change Y co-ordinate to the top of the column
+                let Node = SKShapeNode(circleOfRadius: (shortSide/20.7)) //Make more scalable?
                 
                 if playerTurn == 0 {
                     Node.fillColor = UIColor.yellowColor()
@@ -118,7 +128,7 @@ class TwoPlayerScene: SKScene {
     {
         //Define some variables
         let gridLineWidth = self.frame.width / 100 //How thick the lines of the grid are.
-        let gridHeight = (self.frame.height / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
+        let gridHeight = (shortSide / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
         let gridWidth = gridHeight // needs to be equal so we have a grid.
         let paddingSidesWidth = (self.frame.width - gridWidth) / 2
         let paddingBottomHeight = (self.frame.height - gridHeight) / 2

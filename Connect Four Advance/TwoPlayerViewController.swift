@@ -11,11 +11,20 @@ import SpriteKit
 
 class TwoPlayerViewController: UIViewController {
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            return .AllButUpsideDown
+        } else {
+            return .All
+        }
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Two Player loaded")
         
-            let scene = TwoPlayerScene(size: view.bounds.size)
+        let scene = TwoPlayerScene(size: view.bounds.size)
         
             // Configure the view.
             let skView = self.view as! SKView
@@ -32,13 +41,6 @@ class TwoPlayerViewController: UIViewController {
         
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .AllButUpsideDown
-        } else {
-            return .All
-        }
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
