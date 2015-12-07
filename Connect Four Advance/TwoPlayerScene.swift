@@ -13,6 +13,7 @@ class TwoPlayerScene: SKScene {
     
     var playerTurn = 0
     var movesCount = 0
+    var game = GameStatus()
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -29,11 +30,13 @@ class TwoPlayerScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         
-        scaleMode = .ResizeFill
         self.backgroundColor = UIColor.whiteColor()
+        self.scaleMode = .AspectFit
         drawGrid()
     }
     
+    
+
     func isValidMove(loc: CGPoint) -> Bool {
         
         var result = true
@@ -49,17 +52,19 @@ class TwoPlayerScene: SKScene {
     }
     
     
-    func recordMove(pixel: CGPoint)
+    func columnName(pixel: CGPoint) -> String
     {
         print(pixel)
         
-        if pixel.x > self.frame.width/100 * 25 && pixel.x < self.frame.width/100 * 35 -  2 * (self.frame.width/100)
+        switch pixel.x
         {
-            print("column1")
-        }
-        else {
-            print("failed")
-        }
+        case let x where x > self.frame.width/100 * 25 && x < self.frame.width/100 * 35 -  2 * (self.frame.width/100):
+            return "buttonFactory1"
+        default:
+            return "failed"
+
+            }
+        return "none"
     }
     
     
@@ -71,7 +76,7 @@ class TwoPlayerScene: SKScene {
             if isValidMove(touch.locationInNode(self)){
                 
                 let location = CGPoint(x:touch.locationInNode(self).x, y:(self.frame.height/100 * 80)) //Take x co-ordinate for users input, change Y co-ordinate to the top of the column
-                let Node = SKShapeNode(circleOfRadius: (self.frame.height/22)) //Make more scalable?
+                let Node = SKShapeNode(circleOfRadius: (self.frame.height/20.7)) //Make more scalable?
                 
                 if playerTurn == 0 {
                     Node.fillColor = UIColor.yellowColor()
@@ -91,9 +96,15 @@ class TwoPlayerScene: SKScene {
                 Node.zPosition = 1.0
                 
                 self.addChild(Node)
+                
+                let col:String = columnName(location)
+                print(col)
                 movesCount++
                 
-                recordMove(touch.locationInNode(self)) //Debug testing column inputs/ recording
+                game.hasWon(col, turn: movesCount)
+               
+                
+                columnName(touch.locationInNode(self)) //Debug testing column inputs/ recording
             }
         }
     }
