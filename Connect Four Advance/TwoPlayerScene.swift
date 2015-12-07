@@ -42,7 +42,8 @@ class TwoPlayerScene: SKScene {
         
         for touch in touches {
             if movesCount < 42 {
-                let location = touch.locationInNode(self)
+                let location = CGPoint(x:touch.locationInNode(self).x, y:(self.frame.height/100 * 85)) //Take x co-ordinate for users input, change Y co-ordinate to the top of the column
+                
                 let sprite = SKSpriteNode()
                 let Node = SKShapeNode(circleOfRadius: (self.frame.height/22)) //Make more scalable?
                 
@@ -67,6 +68,20 @@ class TwoPlayerScene: SKScene {
                 
                 self.addChild(sprite)
                 movesCount++
+                
+                
+                //Debug testing column inputs/ recording
+                let pixel = touch.locationInNode(self)
+                
+                print(pixel)
+                
+                if pixel.x > self.frame.width/100 * 25 && pixel.x < self.frame.width/100 * 35 -  2 * (self.frame.width/100)
+                {
+                    print("column1")
+                }
+                else {
+                    print("failed")
+                }
             }
         }
     }
@@ -84,7 +99,7 @@ class TwoPlayerScene: SKScene {
         let paddingSidesWidth = (self.frame.width - gridWidth) / 2
         let paddingBottomHeight = (self.frame.height - gridHeight) / 2
         let colWidth = gridWidth / 7
-
+        
         
         //Left padding
         let padd = SKShapeNode(rectOfSize: CGSize(width: paddingSidesWidth, height: self.frame.height))
@@ -140,12 +155,12 @@ class TwoPlayerScene: SKScene {
         padd4.position = CGPointMake(self.frame.width/2, (self.frame.height - padd4.frame.height/2))
         
         self.addChild(padd4)
-
         
-    
+        
+        
         // Code to create columns.
         let walls = 8
-    
+        
         for index in 1 ... walls {
             
             let wallNode = SKShapeNode(rectOfSize: CGSize(width: gridLineWidth, height: gridHeight))
@@ -153,7 +168,7 @@ class TwoPlayerScene: SKScene {
             
             wallNode.fillColor = UIColor.blueColor()
             wallNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridLineWidth * 0.5, height: gridHeight))
-
+            
             wallNode.physicsBody?.friction = 0
             wallNode.physicsBody?.allowsRotation = false
             wallNode.physicsBody?.dynamic = false
