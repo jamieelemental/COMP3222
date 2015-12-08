@@ -12,16 +12,26 @@ import SpriteKit
 class TwoPlayerScene: SKScene {
     
     var playerTurn = 0
-    var movesCount = 0
+    var moveNo = 1
+    
     var game = GameStatus()
+    var move = IsValidMove()
     
     var shortSide = CGFloat(0)
     var longSide = CGFloat(0)
+    var gridLineWidth = CGFloat(0)
+    var gridHeight = CGFloat(0)
+    var gridWidth = CGFloat(0)
+    var paddingSidesWidth = CGFloat(0)
+    var paddingBottomHeight = CGFloat(0)
+    var colWidth = CGFloat(0)
     
     override init(size: CGSize) {
         super.init(size: size)
         
         self.physicsWorld.gravity = CGVectorMake(0, -8)
+        
+        //Define the shorter and longer sides (change with orientation), for scaling.
         if self.frame.height < self.frame.width {
             shortSide = self.frame.height
             longSide = self.frame.width}
@@ -30,7 +40,17 @@ class TwoPlayerScene: SKScene {
             shortSide = self.frame.width
             longSide = self.frame.height
         }
-
+        
+        //Iniitalize variables for grid. Some scaled, some not.
+        
+        //self.gridLineWidth = self.frame.width / 100 //How thick the lines of the grid are.
+        self.gridLineWidth = longSide/100
+        self.gridHeight = (shortSide / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
+        self.gridWidth = gridHeight // needs to be equal so we have a grid.
+        self.paddingSidesWidth = (self.frame.width - gridWidth) / 2
+        self.paddingBottomHeight = (self.frame.height - gridHeight) / 2
+        self.colWidth = gridWidth / 7
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,43 +58,34 @@ class TwoPlayerScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
-        
         self.backgroundColor = UIColor.whiteColor()
         self.scaleMode = .AspectFit
         drawGrid()
     }
     
     
-
-    func isValidMove(loc: CGPoint) -> Bool {
-        
-        var result = true
-    
-        let gridHeight = (shortSide/100) * 70 //The padding on each side is 15%, so the available space should be 70%
-        let gridWidth = gridHeight // needs to be equal so we have a grid.
-        let paddingSidesWidth = (self.frame.width - gridWidth) / 2
-        
-        if movesCount >= 42 { result = false }
-        if loc.x <= paddingSidesWidth { result = false }
-        if loc.x >= (self.frame.width - paddingSidesWidth) { result = false }
-        
-        return result
-    }
-    
-    
     func columnName(pixel: CGPoint) -> String
     {
-        print(pixel)
-        
+        //Gets a column name identifier for each column, based on co-ordinate position.
         switch pixel.x
         {
-        case let x where x > self.frame.width/100 * 15 && x < self.frame.width/100 * 25 -  2 * (self.frame.height/100):
+        case let x where x >= (paddingSidesWidth) && x <= (paddingSidesWidth + colWidth):
             return "buttonFactory1"
+        case let x where x >= (paddingSidesWidth + colWidth) && x <= (paddingSidesWidth + 2 * colWidth):
+            return "buttonFactory2"
+        case let x where x >= (paddingSidesWidth + 2 * colWidth) && x <= (paddingSidesWidth + 3 * colWidth):
+            return "buttonFactory3"
+        case let x where x >= (paddingSidesWidth + 3 * colWidth) && x <= (paddingSidesWidth + 4 * colWidth):
+            return "buttonFactory4"
+        case let x where x >= (paddingSidesWidth + 4 * colWidth) && x <= (paddingSidesWidth + 5 * colWidth):
+            return "buttonFactory5"
+        case let x where x >= (paddingSidesWidth + 5 * colWidth) && x <= (paddingSidesWidth + 6 * colWidth):
+            return "buttonFactory6"
+        case let x where x >= (paddingSidesWidth + 6 * colWidth) && x <= (paddingSidesWidth + 7 * colWidth):
+            return "buttonFactory7"
         default:
             return "failed"
-
-            }
-        return "none"
+        }
     }
     
     
@@ -83,10 +94,14 @@ class TwoPlayerScene: SKScene {
         
         for touch in touches {
             
-            if isValidMove(touch.locationInNode(self)){
+            let location = CGPoint(x:touch.locationInNode(self).x, y:(paddingBottomHeight + gridHeight - colWidth)) //Take x co-ordinate of users input, changes Y co-ordinate to top of column
+            
+            let col = columnName(location) //get column identifier
+            
+            if move.checkValid(col){
                 
-                let location = CGPoint(x:touch.locationInNode(self).x, y:(self.frame.height/100 * 70)) //Take x co-ordinate for users input, change Y co-ordinate to the top of the column
-                let Node = SKShapeNode(circleOfRadius: (shortSide/20.7)) //Make more scalable?
+                
+                let Node = SKShapeNode(circleOfRadius: (colWidth - 0.4 * gridLineWidth)/2) //Circle have a radius of half the column space, minus some of the column walls.
                 
                 if playerTurn == 0 {
                     Node.fillColor = UIColor.yellowColor()
@@ -97,7 +112,7 @@ class TwoPlayerScene: SKScene {
                     Node.fillColor = UIColor.redColor()
                     playerTurn = 0
                 }
-            
+                
                 Node.position = location
                 Node.physicsBody = SKPhysicsBody(circleOfRadius: Node.frame.width/2)
                 Node.physicsBody?.friction = 0
@@ -108,13 +123,11 @@ class TwoPlayerScene: SKScene {
                 self.addChild(Node)
                 
                 let col:String = columnName(location)
-                print(col)
-                movesCount++
+              
+                game.hasWon(col, turn: moveNo) //Prompt some Win notice? 
                 
-                game.hasWon(col, turn: movesCount)
-               
-                
-                columnName(touch.locationInNode(self)) //Debug testing column inputs/ recording
+                //ELSE
+                moveNo++
             }
         }
     }
@@ -126,14 +139,7 @@ class TwoPlayerScene: SKScene {
     
     func drawGrid()
     {
-        //Define some variables
-        let gridLineWidth = self.frame.width / 100 //How thick the lines of the grid are.
-        let gridHeight = (shortSide / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
-        let gridWidth = gridHeight // needs to be equal so we have a grid.
-        let paddingSidesWidth = (self.frame.width - gridWidth) / 2
-        let paddingBottomHeight = (self.frame.height - gridHeight) / 2
-        let colWidth = gridWidth / 7
-
+        
         // Code to create columns
         for index in 1 ... 8 {
             
@@ -176,67 +182,3 @@ class TwoPlayerScene: SKScene {
         }
     }
 }
-
-
-
-
-
-
-//        //Left padding
-//        let padd = SKShapeNode(rectOfSize: CGSize(width: paddingSidesWidth, height: self.frame.height))
-//
-//        padd.physicsBody = SKPhysicsBody(rectangleOfSize: padd.frame.size)
-//        padd.physicsBody?.friction = 0
-//        padd.physicsBody?.allowsRotation = false
-//        padd.physicsBody?.dynamic = false
-//        padd.zPosition = 1.0
-//        padd.fillColor = UIColor.whiteColor()
-//        padd.position = CGPointMake(padd.frame.width/2, self.frame.height/2)
-//
-//        self.addChild(padd)
-//
-//
-//        //Right padding
-//        let padd2 = SKShapeNode(rectOfSize: CGSize(width: paddingSidesWidth, height: self.frame.height))
-//
-//        padd2.physicsBody = SKPhysicsBody(rectangleOfSize: padd2.frame.size)
-//        padd2.physicsBody?.friction = 0
-//        padd2.physicsBody?.allowsRotation = false
-//        padd2.physicsBody?.dynamic = false
-//        padd2.zPosition = 1.0
-//        padd2.fillColor = UIColor.whiteColor()
-//        padd2.position = CGPointMake( (self.frame.width - padd2.frame.width/2), self.frame.height/2)
-//
-//        self.addChild(padd2)
-//
-//
-//        //Bottom padding
-//        let padd3 = SKShapeNode(rectOfSize: CGSize(width: self.frame.width, height: paddingBottomHeight))
-//
-//        padd3.physicsBody = SKPhysicsBody(rectangleOfSize: padd3.frame.size)
-//        padd3.physicsBody?.friction = 0
-//        padd3.physicsBody?.allowsRotation = false
-//        padd3.physicsBody?.dynamic = false
-//        padd3.zPosition = 1.0
-//        padd3.fillColor = UIColor.whiteColor()
-//        padd3.position = CGPointMake(self.frame.width/2, padd3.frame.height/2)
-//
-//        self.addChild(padd3)
-//
-//
-//        //Top padding
-//        let padd4 = SKShapeNode(rectOfSize: CGSize(width: self.frame.width, height: paddingBottomHeight))
-//
-//        padd4.physicsBody = SKPhysicsBody(rectangleOfSize: padd4.frame.size)
-//        padd4.physicsBody?.friction = 0
-//        padd4.physicsBody?.allowsRotation = false
-//        padd4.physicsBody?.dynamic = false
-//        padd4.zPosition = 1.0
-//        padd4.fillColor = UIColor.whiteColor()
-//        padd4.position = CGPointMake(self.frame.width/2, (self.frame.height - padd4.frame.height/2))
-//
-//        self.addChild(padd4)
-
-
-
-
