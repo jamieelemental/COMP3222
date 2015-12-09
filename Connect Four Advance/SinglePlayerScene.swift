@@ -46,10 +46,14 @@ class SinglePlayerScene: SKScene {
         self.physicsBody?.friction = 1
         
         // Code to generate a playable area - to ensure compatability on multiple devices.
-        let gameBoard = SKSpriteNode(color: SKColor.whiteColor(), size: CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2))
+        //let gameBoard = SKSpriteNode(color: SKColor.whiteColor(), size: CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2))
+        let gameBoard = SKSpriteNode(imageNamed:"Connect4Board2")
+        gameBoard.size = CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2)
+        
         gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
-        gameBoard.zPosition = 0
+        gameBoard.zPosition = 100
         self.addChild(gameBoard)
+        print("Height: ", gameBoard.size.height, "Width: ", gameBoard.size.width )
         
         // Code to create columns.
         let walls = 8
@@ -71,7 +75,7 @@ class SinglePlayerScene: SKScene {
             wall.physicsBody?.allowsRotation = false
             wall.name = wallCategoryName
             wall.physicsBody?.dynamic = false
-            wall.zPosition = 1.0
+            wall.zPosition = 0
             
             a = a + gameBoard.size.width/7
             print(a)

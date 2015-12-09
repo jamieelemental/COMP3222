@@ -13,8 +13,6 @@ class MenuViewController: UIViewController {
     @IBAction func changeOri(sender: AnyObject) {
         let value = UIInterfaceOrientation.Portrait.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
-        
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
