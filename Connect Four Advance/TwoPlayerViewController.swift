@@ -6,19 +6,18 @@
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
-import UIKit
+//import UIKit
 import SpriteKit
 
 class TwoPlayerViewController: UIViewController {
     
-//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-//        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-//            return .AllButUpsideDown
-//        } else {
-//            return .All
-//        }
-//    }
-
+    //    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    //        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+    //            return .AllButUpsideDown
+    //        } else {
+    //            return .All
+    //        }
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,22 +25,21 @@ class TwoPlayerViewController: UIViewController {
         
         let scene = TwoPlayerScene(size: view.bounds.size)
         
-            // Configure the view.
-            let skView = self.view as! SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
+        // Configure the view.
+        let skView = self.view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        scene.scaleMode = .AspectFill
         
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            skView.presentScene(scene)
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        skView.presentScene(scene)
     }
     
     override func shouldAutorotate() -> Bool {
-        return true
-        
+        return false
     }
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
