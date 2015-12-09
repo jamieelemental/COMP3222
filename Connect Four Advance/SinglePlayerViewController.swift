@@ -21,7 +21,6 @@ class SinglePlayerViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             scene.scaleMode = .AspectFill
             skView.presentScene(scene)
-            
         }
     
     override func didReceiveMemoryWarning() {

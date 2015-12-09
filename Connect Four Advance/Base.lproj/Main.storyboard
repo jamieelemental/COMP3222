@@ -83,9 +83,6 @@
                             <constraint firstItem="0X6-3Z-uQY" firstAttribute="top" secondItem="8UH-RM-O2m" secondAttribute="bottom" constant="8" symbolic="YES" id="yyv-0m-hq2"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="setOrientation" destination="nSK-Fb-7fi" id="nL9-1z-HYa"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLu-ys-FZw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

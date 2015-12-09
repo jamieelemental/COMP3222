@@ -16,7 +16,8 @@ class MenuViewController: UIViewController {
     }
 
     @IBAction func setOrientation(sender: AnyObject) {
-        UIDevice.currentDevice().setValue(UIInterfaceOrientation.LandscapeLeft.rawValue, forKey: "orientation")
+        let orientation = UIInterfaceOrientation.LandscapeLeft.rawValue
+        UIDevice.currentDevice().setValue(orientation, forKey: "orientation")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
