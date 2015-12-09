@@ -29,7 +29,7 @@ class TwoPlayerViewController: UIViewController {
     }
     
     override func shouldAutorotate() -> Bool {
-        return false
+        return true
     }
 
     override func didReceiveMemoryWarning() {
