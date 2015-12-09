@@ -49,7 +49,7 @@ class SinglePlayerScene: SKScene {
         // Code to generate a playable area - to ensure compatability on multiple devices.
         //let gameBoard = SKSpriteNode(color: SKColor.whiteColor(), size: CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2))
         gameBoard = SKSpriteNode(imageNamed:"Connect4Board2")
-        gameBoard.size = CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2)
+        gameBoard.size = CGSizeMake(self.frame.size.width/1.4, self.frame.size.width/2.4)
         
         gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         gameBoard.zPosition = 100
