@@ -42,8 +42,6 @@ class TwoPlayerScene: SKScene {
         }
         
         //Iniitalize variables for grid. Some scaled, some not.
-        
-        //self.gridLineWidth = self.frame.width / 100 //How thick the lines of the grid are.
         self.gridLineWidth = longSide/100
         self.gridHeight = (shortSide / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
         self.gridWidth = gridHeight // needs to be equal so we have a grid.
@@ -90,7 +88,6 @@ class TwoPlayerScene: SKScene {
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /* Called when a touch begins */
         
         for touch in touches {
             
