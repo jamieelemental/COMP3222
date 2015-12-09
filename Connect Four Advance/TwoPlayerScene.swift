@@ -6,12 +6,12 @@
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
-import Foundation
+//import Foundation
 import SpriteKit
 
 class TwoPlayerScene: SKScene {
     
-    var playerTurn = 0
+    var playerTurn = 1
     var moveNo = 1
     
     var game = GameStatus()
@@ -100,17 +100,18 @@ class TwoPlayerScene: SKScene {
             
             if move.checkValid(col){
                 
-                
                 let Node = SKShapeNode(circleOfRadius: (colWidth - 0.4 * gridLineWidth)/2) //Circle have a radius of half the column space, minus some of the column walls.
                 
-                if playerTurn == 0 {
+                game.hasWon(col, turn: playerTurn) //Prompt some Win notice?
+                
+                if playerTurn == 1 {
                     Node.fillColor = UIColor.yellowColor()
-                    playerTurn = 1
+                    playerTurn = 2
                 }
                     
-                else if playerTurn == 1{
+                else if playerTurn == 2{
                     Node.fillColor = UIColor.redColor()
-                    playerTurn = 0
+                    playerTurn = 1
                 }
                 
                 Node.position = location
@@ -122,11 +123,6 @@ class TwoPlayerScene: SKScene {
                 
                 self.addChild(Node)
                 
-                let col:String = columnName(location)
-              
-                game.hasWon(col, turn: moveNo) //Prompt some Win notice? 
-                
-                //ELSE
                 moveNo++
             }
         }
@@ -139,7 +135,6 @@ class TwoPlayerScene: SKScene {
     
     func drawGrid()
     {
-        
         // Code to create columns
         for index in 1 ... 8 {
             
