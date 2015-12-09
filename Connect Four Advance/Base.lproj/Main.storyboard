@@ -60,6 +60,7 @@
                                 <animations/>
                                 <state key="normal" title="Single Player"/>
                                 <connections>
+                                    <action selector="changeOri:" destination="LAZ-h3-7Gb" eventType="touchUpInside" id="8Az-fC-AeW"/>
                                     <segue destination="E25-Bf-CDQ" kind="show" id="Q5L-XY-Aly"/>
                                 </connections>
                             </button>

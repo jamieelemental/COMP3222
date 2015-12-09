@@ -49,18 +49,10 @@ class SinglePlayerScene: SKScene {
         let gameBoard = SKSpriteNode(color: SKColor.whiteColor(), size: CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2))
         gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         gameBoard.zPosition = 0
-        //let GameBorder = SKPhysicsBody(edgeLoopFromRect: gameBoard.frame)
-        //gameBoard.physicsBody = GameBorder
-        //gameBoard.physicsBody?.friction = 1
-        
-        
-        
         self.addChild(gameBoard)
         
         // Code to create columns.
         let walls = 8
-        //let wallWidth = SKSpriteNode(imageNamed: "wall").size.width
-        //let padding:Float = Float(gameBoard.frame.size.width)/Float(10.0)
         // Code to generate ball factorys
         let ballFacts = 7
         var a = gameBoard.size.width/gameBoard.size.width
