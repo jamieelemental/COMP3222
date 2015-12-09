@@ -133,7 +133,6 @@ class SinglePlayerScene: SKScene {
             if valid.checkValid(name) == true
             {
                 // Check if User has won
-                game.hasWon(name, turn: turn)
                 let piece = SKSpriteNode()
                 let Node = SKShapeNode(circleOfRadius: gameBoard.size.width/24)
                 if turn == 1 {
@@ -155,6 +154,21 @@ class SinglePlayerScene: SKScene {
                 self.addChild(piece)
                 moveCount++
                 print(moveCount)
+                
+                if game.hasWon(name, turn: turn) == true {
+                    let alert = UIAlertView()
+                    alert.title = "GameWon"
+                    alert.message = " Click to restart"
+                    alert.addButtonWithTitle("Ok")
+                    alert.show()
+                    
+                    let gameScene = SinglePlayerScene(size: self.size)
+                    let transition = SKTransition.doorsCloseHorizontalWithDuration(2.5)
+                    gameScene.scaleMode = SKSceneScaleMode.AspectFill
+                    self.scene!.view?.presentScene(gameScene, transition: transition)
+                    
+                }
+                
             } else if moveCount == 42 {
                 let alert = UIAlertView()
                 alert.title = "GameOver"

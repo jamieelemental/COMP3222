@@ -9,88 +9,79 @@
 import Foundation
 
 class GameStatus {
-    var array1: [Int] = [0,0,0,0,0,0]
-    var array2: [Int] = [0,0,0,0,0,0]
-    var array3: [Int] = [0,0,0,0,0,0]
-    var array4: [Int] = [0,0,0,0,0,0]
-    var array5: [Int] = [0,0,0,0,0,0]
-    var array6: [Int] = [0,0,0,0,0,0]
-    var array7: [Int] = [0,0,0,0,0,0]
-    var b1Count = 0
-    var b2Count = 0
-    var b3Count = 0
-    var b4Count = 0
-    var b5Count = 0
-    var b6Count = 0
-    var b7Count = 0
-    //var turn = 0
+    var array1: [Int] = []
+    var array2: [Int] = []
+    var array3: [Int] = []
+    var array4: [Int] = []
+    var array5: [Int] = []
+    var array6: [Int] = []
+    var array7: [Int] = []
+    var Player = 0
     
-    func hasWon(move: String, turn: Int) -> Bool {
-        
-        switch (move){
-        case "buttonFactory1":
-            array1[b1Count] = turn
-            b1Count = b1Count + 1
-        case "buttonFactory2":
-            array2[b2Count] = turn
-            b2Count = b2Count + 1
-        case "buttonFactory3":
-            array3[b3Count] = turn
-            b3Count = b3Count + 1
-        case "buttonFactory4":
-            array4[b4Count] = turn
-            b4Count = b4Count + 1
-        case "buttonFactory5":
-            array5[b5Count] = turn
-            b5Count = b5Count + 1
-        case "buttonFactory6":
-            array6[b6Count] = turn
-            b6Count = b6Count + 1
-        case "buttonFactory7":
-            array7[b7Count] = turn
-            b7Count = b7Count + 1
-        default: break
-            
-        }
-        
-        // check col for win
-        func CheckCol(array: [Int]) -> Int
-        {
-            var prevItem = 10
-            var count = 1
-            
+    // check for a winner in a coloum.
+    func CheckCol(array: [Int]) -> String
+    {
+        var prevItem = 10
+        var count = 1
+        if (array.count > 3){
             for item in array
             {
-                if(prevItem == item)
+                if(prevItem == item && prevItem != 0)
                 {
                     count++
+                    if count == 4 {
+                        return "won"
+                    }
                 } else if (prevItem != item) {
-                    count = 0
+                    count = 1
                 }
                 
                 prevItem = item
             }
-            
-            return count
         }
         
-        print(CheckCol(array1))
-        print(CheckCol(array2))
-        print(CheckCol(array3))
-        print(CheckCol(array4))
-        print(CheckCol(array5))
-        print(CheckCol(array6))
-        print(CheckCol(array7))
+        return "None"
+    }
 
-        print(array1)
-        print(array2)
-        print(array3)
-        print(array4)
-        print(array5)
-        print(array6)
-        print(array7)
+    
+    
+    // Check for a winner.
+    
+    func hasWon(move: String, turn: Int) -> Bool {
+        Player = turn
+        var result = ""
         
-        return true
+        switch (move){
+        case "buttonFactory1":
+            array1.append(turn)
+            result = CheckCol(array1)
+        case "buttonFactory2":
+            array2.append(turn)
+            result = CheckCol(array2)
+        case "buttonFactory3":
+            array3.append(turn)
+            result = CheckCol(array3)
+        case "buttonFactory4":
+            array4.append(turn)
+            result = CheckCol(array4)
+        case "buttonFactory5":
+            array5.append(turn)
+            result = CheckCol(array5)
+        case "buttonFactory6":
+            array6.append(turn)
+            result = CheckCol(array6)
+        case "buttonFactory7":
+            array7.append(turn)
+            result = CheckCol(array7)
+        default: break
+        }
+        
+        print(result)
+        
+        if (result == "won"){
+            return true
+        }
+        return false
     }
     
     
