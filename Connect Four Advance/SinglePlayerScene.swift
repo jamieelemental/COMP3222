@@ -25,8 +25,8 @@ class SinglePlayerScene: SKScene {
     // Create Music player
     var bgMusicPlayer = AVAudioPlayer()
     
-    
     override func didMoveToView(view: SKView) {
+        
         
         //let bgMusicURL = NSBundle.mainBundle().URLForResource("BGMusic", withExtension: "mp3")
         //bgMusicPlayer = AVAudioPlayer(contentsOfURL: bgMusicURL, error: nil)
@@ -49,9 +49,9 @@ class SinglePlayerScene: SKScene {
         let gameBoard = SKSpriteNode(color: SKColor.whiteColor(), size: CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2))
         gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         gameBoard.zPosition = 0
-        let GameBorder = SKPhysicsBody(edgeLoopFromRect: gameBoard.frame)
-        gameBoard.physicsBody = GameBorder
-        gameBoard.physicsBody?.friction = 1
+        //let GameBorder = SKPhysicsBody(edgeLoopFromRect: gameBoard.frame)
+        //gameBoard.physicsBody = GameBorder
+        //gameBoard.physicsBody?.friction = 1
         
         
         
@@ -59,14 +59,15 @@ class SinglePlayerScene: SKScene {
         
         // Code to create columns.
         let walls = 8
-        let wallWidth = SKSpriteNode(imageNamed: "wall").size.width
-        let padding:Float = Float(gameBoard.frame.size.width)/Float(10.0)
+        //let wallWidth = SKSpriteNode(imageNamed: "wall").size.width
+        //let padding:Float = Float(gameBoard.frame.size.width)/Float(10.0)
         // Code to generate ball factorys
         let ballFacts = 7
         var a = gameBoard.size.width/gameBoard.size.width
+        var b = gameBoard.size.width/gameBoard.size.width
         
         // Generate the walls inside the playable area
-        for index in 1 ... walls {
+        for _ in 1 ... walls {
             let wall = SKSpriteNode(imageNamed: "wall")
             wall.size.height = gameBoard.size.height
             //wall.anchorPoint = CGPointMake(0,0)
@@ -99,49 +100,26 @@ class SinglePlayerScene: SKScene {
         gameBoard.addChild(bottom)
 
         
-        
-//        // Generate the walls
-          let offset:Float = (Float(gameBoard.frame.size.width) - (Float(wallWidth) * Float(walls) + padding * (Float(walls) - 1 ) ) ) / 2
-//        
-//        for index in 1 ... walls {
-//            let wall = SKSpriteNode(imageNamed: "wall")
-//            
-//            let calc1:Float = Float(index) - 0.5
-//            let calc2:Float = Float(index) - 1
-//            
-//            wall.position = CGPointMake(CGFloat(calc1 * Float(wall.frame.size.width) + calc2 * padding + offset), 1)
-//            
-//            wall.physicsBody = SKPhysicsBody(rectangleOfSize: wall.frame.size)
-//            wall.physicsBody?.allowsRotation = false
-//            wall.name = wallCategoryName
-//            wall.physicsBody?.dynamic = false
-//            wall.zPosition = 1.0
-//
-//            gameBoard.addChild(wall)
-//    }
-        
         // Generate Ball Factorys
-        for index in 1 ... ballFacts {
-            let wall = SKSpriteNode(imageNamed: "wall")
-            
-            let calc1:Float = Float(index) - 0.5
-            let calc2:Float = Float(index) - 1
+        for _ in 1 ... ballFacts {
             
             //Ball Factory code
             let ballMaker = SKSpriteNode(imageNamed:"ball")
             ballMaker.name = buttonFactoryCategoryName + String(wallNumber)
             ballMaker.physicsBody?.allowsRotation = false
             ballMaker.physicsBody?.dynamic = false
-            ballMaker.size.width = CGFloat(39)
-            ballMaker.size.height = CGFloat(39)
-            ballMaker.position = CGPointMake(CGFloat(calc1 * Float(wall.frame.size.width) + calc2 * padding + offset + 30), 570)
+            ballMaker.size.width = CGFloat(27)
+            ballMaker.size.height = CGFloat(27)
+            ballMaker.position = CGPointMake(0 - gameBoard.size.width/2 + 22 + b,gameBoard.size.height/2)
             ballMaker.zPosition = 1.0
+            b = b + gameBoard.size.width/7
             
-            self.addChild(ballMaker)
+            gameBoard.addChild(ballMaker)
             wallNumber = wallNumber + 1
             
         }
     }
+
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
@@ -158,7 +136,7 @@ class SinglePlayerScene: SKScene {
                 // Check if User has won
                 game.hasWon(name, turn: turn)
                 let piece = SKSpriteNode()
-                let Node = SKShapeNode(circleOfRadius: 18)
+                let Node = SKShapeNode(circleOfRadius: 13)
                 if turn == 1 {
                         Node.fillColor = UIColor.blueColor()
                         turn = 2

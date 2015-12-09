@@ -11,7 +11,6 @@ import SpriteKit
 
 
 class SinglePlayerViewController: UIViewController {
-
         override func viewDidLoad() {
             super.viewDidLoad()
             let scene = SinglePlayerScene(size: view.bounds.size)
@@ -21,6 +20,7 @@ class SinglePlayerViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             scene.scaleMode = .AspectFill
             skView.presentScene(scene)
+            
         }
     
     override func didReceiveMemoryWarning() {

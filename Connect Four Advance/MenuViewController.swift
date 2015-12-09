@@ -9,10 +9,17 @@
 import UIKit
 
 class MenuViewController: UIViewController {
+    let value = UIInterfaceOrientation.Portrait.rawValue
+    
+    override func shouldAutorotate() -> Bool {
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        return false;
+    }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         
+        super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
