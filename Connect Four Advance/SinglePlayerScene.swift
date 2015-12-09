@@ -21,6 +21,7 @@ class SinglePlayerScene: SKScene {
     let valid = IsValidMove()
     let game = GameStatus()
     var moveCount = 0
+    var gameBoard = SKSpriteNode()
     
     // Create Music player
     var bgMusicPlayer = AVAudioPlayer()
@@ -47,7 +48,7 @@ class SinglePlayerScene: SKScene {
         
         // Code to generate a playable area - to ensure compatability on multiple devices.
         //let gameBoard = SKSpriteNode(color: SKColor.whiteColor(), size: CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2))
-        let gameBoard = SKSpriteNode(imageNamed:"Connect4Board2")
+        gameBoard = SKSpriteNode(imageNamed:"Connect4Board2")
         gameBoard.size = CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2)
         
         gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
@@ -69,7 +70,9 @@ class SinglePlayerScene: SKScene {
             //wall.anchorPoint = CGPointMake(0,0)
             
             wall.position = CGPointMake(0 - gameBoard.size.width/2 + a,0)
-            print(wall.position)
+            wall.size.width = gameBoard.size.width/18
+            
+            
             
             wall.physicsBody = SKPhysicsBody(rectangleOfSize: wall.frame.size)
             wall.physicsBody?.allowsRotation = false
@@ -104,9 +107,9 @@ class SinglePlayerScene: SKScene {
             ballMaker.name = buttonFactoryCategoryName + String(wallNumber)
             ballMaker.physicsBody?.allowsRotation = false
             ballMaker.physicsBody?.dynamic = false
-            ballMaker.size.width = CGFloat(27)
-            ballMaker.size.height = CGFloat(27)
-            ballMaker.position = CGPointMake(0 - gameBoard.size.width/2 + 22 + b,gameBoard.size.height/2)
+            ballMaker.size.width = gameBoard.size.width/13
+            ballMaker.size.height = gameBoard.size.width/13
+            ballMaker.position = CGPointMake(0 - gameBoard.size.width/2 + gameBoard.size.width/14 + b,gameBoard.size.height/2)
             ballMaker.zPosition = 1.0
             b = b + gameBoard.size.width/7
             
@@ -132,7 +135,7 @@ class SinglePlayerScene: SKScene {
                 // Check if User has won
                 game.hasWon(name, turn: turn)
                 let piece = SKSpriteNode()
-                let Node = SKShapeNode(circleOfRadius: 13)
+                let Node = SKShapeNode(circleOfRadius: gameBoard.size.width/24)
                 if turn == 1 {
                         Node.fillColor = UIColor.blueColor()
                         turn = 2
