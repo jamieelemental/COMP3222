@@ -10,15 +10,7 @@
 import SpriteKit
 
 class TwoPlayerViewController: UIViewController {
-    
-    //    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-    //        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-    //            return .AllButUpsideDown
-    //        } else {
-    //            return .All
-    //        }
-    //    }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Two Player loaded")
