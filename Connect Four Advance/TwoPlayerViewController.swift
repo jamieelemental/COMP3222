@@ -6,24 +6,24 @@
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
-//import UIKit
+import UIKit
 import SpriteKit
 
 class TwoPlayerViewController: UIViewController {
-   
+    
+    var scene = SKScene()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Two Player loaded")
         
-        let scene = TwoPlayerScene(size: view.bounds.size)
+        scene = TwoPlayerScene(size: view.bounds.size)
+        scene.scaleMode = .AspectFit
         
         // Configure the view.
         let skView = self.view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
-        scene.scaleMode = .AspectFill
-        
-        /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
         skView.presentScene(scene)
     }
@@ -31,14 +31,19 @@ class TwoPlayerViewController: UIViewController {
     override func shouldAutorotate() -> Bool {
         return true
     }
-
+    
     override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
+        super.didReceiveMemoryWarning() // Release any cached data, images, etc that aren't in use.
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+   
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        let newSize =  CGSize(width:view.bounds.width, height:view.bounds.height)
+        scene.size = newSize
     }
 }
 

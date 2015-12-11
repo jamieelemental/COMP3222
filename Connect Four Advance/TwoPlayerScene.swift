@@ -6,24 +6,15 @@
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
-//import Foundation
+import Foundation
 import SpriteKit
 
 class TwoPlayerScene: SKScene {
     
-    var playerTurn = 1
-    var moveNo = 1
-    
-    var game = GameStatus()
-    var move = IsValidMove()
-    
     var shortSide = CGFloat(0)
-    var longSide = CGFloat(0)
     var gridLineWidth = CGFloat(0)
     var gridHeight = CGFloat(0)
     var gridWidth = CGFloat(0)
-    var paddingSidesWidth = CGFloat(0)
-    var paddingBottomHeight = CGFloat(0)
     var colWidth = CGFloat(0)
     
     override init(size: CGSize) {
@@ -34,19 +25,16 @@ class TwoPlayerScene: SKScene {
         //Define the shorter and longer sides (change with orientation), for scaling.
         if self.frame.height < self.frame.width {
             shortSide = self.frame.height
-            longSide = self.frame.width}
+        }
         
         if self.frame.width < self.frame.height {
             shortSide = self.frame.width
-            longSide = self.frame.height
         }
         
         //Iniitalize variables for grid. Some scaled, some not.
-        self.gridLineWidth = longSide/100
-        self.gridHeight = (shortSide / 100) * 70 //The padding on each side is 10%, so the available space should be 80%
-        self.gridWidth = gridHeight // needs to be equal so we have a grid.
-        self.paddingSidesWidth = (self.frame.width - gridWidth) / 2
-        self.paddingBottomHeight = (self.frame.height - gridHeight) / 2
+        self.gridLineWidth = self.frame.width/100
+        self.gridHeight = (shortSide / 100) * 70
+        self.gridWidth = gridHeight
         self.colWidth = gridWidth / 7
         
     }
@@ -57,74 +45,8 @@ class TwoPlayerScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.whiteColor()
-        self.scaleMode = .AspectFit
         drawGrid()
     }
-    
-    
-    func columnName(pixel: CGPoint) -> String
-    {
-        //Gets a column name identifier for each column, based on co-ordinate position.
-        switch pixel.x
-        {
-        case let x where x >= (paddingSidesWidth) && x <= (paddingSidesWidth + colWidth):
-            return "buttonFactory1"
-        case let x where x >= (paddingSidesWidth + colWidth) && x <= (paddingSidesWidth + 2 * colWidth):
-            return "buttonFactory2"
-        case let x where x >= (paddingSidesWidth + 2 * colWidth) && x <= (paddingSidesWidth + 3 * colWidth):
-            return "buttonFactory3"
-        case let x where x >= (paddingSidesWidth + 3 * colWidth) && x <= (paddingSidesWidth + 4 * colWidth):
-            return "buttonFactory4"
-        case let x where x >= (paddingSidesWidth + 4 * colWidth) && x <= (paddingSidesWidth + 5 * colWidth):
-            return "buttonFactory5"
-        case let x where x >= (paddingSidesWidth + 5 * colWidth) && x <= (paddingSidesWidth + 6 * colWidth):
-            return "buttonFactory6"
-        case let x where x >= (paddingSidesWidth + 6 * colWidth) && x <= (paddingSidesWidth + 7 * colWidth):
-            return "buttonFactory7"
-        default:
-            return "failed"
-        }
-    }
-    
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        for touch in touches {
-            
-            let location = CGPoint(x:touch.locationInNode(self).x, y:(paddingBottomHeight + gridHeight - colWidth)) //Take x co-ordinate of users input, changes Y co-ordinate to top of column
-            
-            let col = columnName(location) //get column identifier
-            
-            if move.checkValid(col){
-                
-                let Node = SKShapeNode(circleOfRadius: (colWidth - 0.4 * gridLineWidth)/2) //Circle have a radius of half the column space, minus some of the column walls.
-                
-                game.hasWon(col, turn: playerTurn) //Prompt some Win notice?
-                
-                if playerTurn == 1 {
-                    Node.fillColor = UIColor.yellowColor()
-                    playerTurn = 2
-                }
-                    
-                else if playerTurn == 2{
-                    Node.fillColor = UIColor.redColor()
-                    playerTurn = 1
-                }
-                
-                Node.position = location
-                Node.physicsBody = SKPhysicsBody(circleOfRadius: Node.frame.width/2)
-                Node.physicsBody?.friction = 0
-                Node.physicsBody?.restitution = 0.1
-                Node.physicsBody?.allowsRotation = false
-                Node.zPosition = 1.0
-                
-                self.addChild(Node)
-                
-                moveNo++
-            }
-        }
-    }
-    
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
@@ -143,7 +65,7 @@ class TwoPlayerScene: SKScene {
             wallNode.physicsBody?.allowsRotation = false
             wallNode.physicsBody?.dynamic = false
             wallNode.zPosition = 2.0
-            wallNode.position = CGPointMake(CGFloat(paddingSidesWidth) + CGFloat(index - 1) * CGFloat(colWidth), self.frame.height/2)
+            wallNode.position = CGPointMake(CGFloat(index - 1) * CGFloat(colWidth) + gridLineWidth/2, wallNode.frame.height/2)
             
             self.addChild(wallNode)
         }
@@ -157,7 +79,7 @@ class TwoPlayerScene: SKScene {
         rowNode.physicsBody?.allowsRotation = false
         rowNode.physicsBody?.dynamic = false
         rowNode.zPosition = 1.0
-        rowNode.position = CGPointMake(self.frame.width/2, paddingBottomHeight)
+        rowNode.position = CGPointMake(rowNode.frame.width/2, gridLineWidth/2)
         
         self.addChild(rowNode)
         
@@ -168,7 +90,7 @@ class TwoPlayerScene: SKScene {
             
             otherRows.fillColor = UIColor.blueColor()
             otherRows.zPosition = 2.0
-            otherRows.position = CGPointMake(self.frame.width/2, CGFloat(paddingBottomHeight) + CGFloat(rowIndex) * CGFloat(colWidth))
+            otherRows.position = CGPointMake(rowNode.frame.width/2 + gridLineWidth/2, CGFloat(rowIndex) * CGFloat(colWidth))
             
             self.addChild(otherRows)
         }
