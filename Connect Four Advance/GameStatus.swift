@@ -161,9 +161,9 @@ class GameStatus {
         default: break
         }
         
-        print("ResultCol: ",result)
-        print("ResultRow: ",result)
-        print("GAME: ",board)
+        //print("ResultCol: ",result)
+        //print("ResultRow: ",result)
+        //print("GAME: ",board)
         
         if (result == "won"||result2 == "won"||result3 == "won"||result4 == "won"){
             return true
