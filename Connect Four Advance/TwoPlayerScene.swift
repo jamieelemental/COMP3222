@@ -59,7 +59,7 @@ class TwoPlayerScene: SKScene {
             
             let wallNode = SKShapeNode(rectOfSize: CGSize(width: gridLineWidth, height: gridHeight))
             
-            wallNode.fillColor = UIColor.blueColor()
+            wallNode.fillColor = UIColor.whiteColor()
             wallNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridLineWidth * 0.5, height: gridHeight))
             wallNode.physicsBody?.friction = 0
             wallNode.physicsBody?.allowsRotation = false
@@ -73,7 +73,7 @@ class TwoPlayerScene: SKScene {
         //Create bottom row, with physical body so cannot pass through
         let rowNode = SKShapeNode(rectOfSize: CGSize(width: gridWidth, height: gridLineWidth))
         
-        rowNode.fillColor = UIColor.blueColor()
+        rowNode.fillColor = UIColor.whiteColor()
         rowNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridWidth, height: gridLineWidth * 0.5))
         rowNode.physicsBody?.friction = 0
         rowNode.physicsBody?.allowsRotation = false
@@ -88,11 +88,13 @@ class TwoPlayerScene: SKScene {
             
             let otherRows = SKShapeNode(rectOfSize: CGSize(width: gridWidth, height: gridLineWidth))
             
-            otherRows.fillColor = UIColor.blueColor()
+            otherRows.fillColor = UIColor.whiteColor()
             otherRows.zPosition = 2.0
             otherRows.position = CGPointMake(rowNode.frame.width/2 + gridLineWidth/2, CGFloat(rowIndex) * CGFloat(colWidth))
             
             self.addChild(otherRows)
         }
+        
+        
     }
 }
