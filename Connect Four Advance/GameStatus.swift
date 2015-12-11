@@ -9,76 +9,113 @@
 import Foundation
 
 class GameStatus {
-    var array1: [Int] = []
-    var array2: [Int] = []
-    var array3: [Int] = []
-    var array4: [Int] = []
-    var array5: [Int] = []
-    var array6: [Int] = []
-    var array7: [Int] = []
     var Player = 0
+    var board: [[Int]] = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
+    var col1count = 0
+    var col2count = 0
+    var col3count = 0
+    var col4count = 0
+    var col5count = 0
+    var col6count = 0
+    var col7count = 0
     
     // check for a winner in a coloum.
-    func CheckCol(array: [Int]) -> String
-    {
+    func CheckCol(array: [[Int]], col: Int) -> String {
         var prevItem = 10
         var count = 1
-        if (array.count > 3){
-            for item in array
-            {
-                if(prevItem == item && prevItem != 0)
-                {
+        if (array[col].count > 3) {
+            for item in array[col] {
+                if(prevItem == item && prevItem != 0){
                     count++
-                    if count == 4 {
+                    if count == 4{
                         return "won"
                     }
-                } else if (prevItem != item) {
+                } else {
                     count = 1
                 }
-                
                 prevItem = item
             }
+            
         }
-        
         return "None"
     }
+    
+    
+    // check for a winner in a Row.
+    func CheckRow(array: [[Int]], col: Int, row: Int) -> String {
+        var prevItem = 10
+        var item = 5
+        var count = 1
+        var i = 0
+            for (i = 0; i < array.count; i++){
+                item = array[i][row]
+                if(prevItem == item && prevItem != 0){
+                    count++
+                    if count == 4{
+                        return "won"
+                    }
+                } else {
+                    count = 1
+                }
+                prevItem = item
+            }
+        return "None"
+        }
 
     
     
-    // Check for a winner.
+    // Track game status.
     
     func hasWon(move: String, turn: Int) -> Bool {
         Player = turn
         var result = ""
+        var result2 = ""
         
         switch (move){
         case "buttonFactory1":
-            array1.append(turn)
-            result = CheckCol(array1)
+            //board[0].append(turn)
+            board[0][col1count] = turn
+            result = CheckCol(board, col: 0)
+            result2 = CheckRow(board, col: 0,row: col1count)
+            col1count++
         case "buttonFactory2":
-            array2.append(turn)
-            result = CheckCol(array2)
+            board[1][col2count] = turn
+            result = CheckCol(board, col: 1)
+            result2 = CheckRow(board, col: 1,row: col2count)
+            col2count++
         case "buttonFactory3":
-            array3.append(turn)
-            result = CheckCol(array3)
+            board[2][col3count] = turn
+            result = CheckCol(board, col: 2)
+            result2 = CheckRow(board, col: 2,row: col3count)
+            col3count++
         case "buttonFactory4":
-            array4.append(turn)
-            result = CheckCol(array4)
+            board[3][col4count] = turn
+            result = CheckCol(board, col: 3)
+            result2 = CheckRow(board, col: 3,row: col4count)
+            col4count++
         case "buttonFactory5":
-            array5.append(turn)
-            result = CheckCol(array5)
+            board[4][col5count] = turn
+            result = CheckCol(board, col: 4)
+            result2 = CheckRow(board, col: 4,row: col5count)
+            col5count++
         case "buttonFactory6":
-            array6.append(turn)
-            result = CheckCol(array6)
+            board[5][col6count] = turn
+            result = CheckCol(board, col: 5)
+            result2 = CheckRow(board, col: 5,row: col6count)
+            col6count++
         case "buttonFactory7":
-            array7.append(turn)
-            result = CheckCol(array7)
+            board[6][col7count] = turn
+            result = CheckCol(board, col: 6)
+            result2 = CheckRow(board, col: 6,row: col7count)
+            col7count++
         default: break
         }
         
-        print(result)
+        print("ResultCol: ",result)
+        print("ResultRow: ",result)
+        print("GAME: ",board)
         
-        if (result == "won"){
+        if (result == "won"||result2 == "won"){
             return true
         }
         return false
