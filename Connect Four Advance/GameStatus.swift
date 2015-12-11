@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class GameStatus {
     var Player = 0
@@ -169,6 +170,25 @@ class GameStatus {
             return true
         }
         return false
+    }
+    
+    
+    
+    // Method to finish the game.
+    func gameWon(){
+        let alert = UIAlertView()
+        alert.title = "GameWon"
+        alert.message = " Click to restart"
+        alert.addButtonWithTitle("Ok")
+        alert.show()
+    }
+    
+    func gameOver(){
+        let alert = UIAlertView()
+        alert.title = "GameOver"
+        alert.message = " Click to restart"
+        alert.addButtonWithTitle("Ok")
+        alert.show()
     }
     
     

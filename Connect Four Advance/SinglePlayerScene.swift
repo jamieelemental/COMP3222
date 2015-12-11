@@ -157,11 +157,8 @@ class SinglePlayerScene: SKScene {
                 //print(moveCount)
                 
                 if game.hasWon(name, turn: turn) == true {
-                    let alert = UIAlertView()
-                    alert.title = "GameWon"
-                    alert.message = " Click to restart"
-                    alert.addButtonWithTitle("Ok")
-                    alert.show()
+                    
+                    game.gameWon()
                     
                     // Save to LeaderBoard
                     leaderBoard.Save("Dan", turns: moveCount, time: "21.22")
@@ -176,11 +173,7 @@ class SinglePlayerScene: SKScene {
                 }
                 
             } else if moveCount == 42 {
-                let alert = UIAlertView()
-                alert.title = "GameOver"
-                alert.message = " Click to restart"
-                alert.addButtonWithTitle("Ok")
-                alert.show()
+                game.gameOver()
                 
                 let gameScene = SinglePlayerScene(size: self.size)
                 let transition = SKTransition.doorsCloseHorizontalWithDuration(2.5)
