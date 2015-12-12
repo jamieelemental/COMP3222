@@ -103,7 +103,6 @@ class TwoPlayerScene: SKScene {
         for touch in touches {
             
             let location = CGPoint(x: touch.locationInView(self.view).x, y:(self.frame.height/100 * 65)) //Take x co-ordinate of users input, changes Y co-ordinate to top of column
-            
             let col = self.columnName(location) //get column identifier
             print(col)
             
