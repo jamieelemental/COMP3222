@@ -25,6 +25,7 @@ class SinglePlayerScene: SKScene {
     var gameBoard = SKSpriteNode()
     let a = CFAbsoluteTimeGetCurrent()
     
+    
     // Create Music player
     var bgMusicPlayer = AVAudioPlayer()
     
@@ -146,21 +147,13 @@ class SinglePlayerScene: SKScene {
                 if game.hasWon(name, turn: turn) == true {
                     
                     game.gameWon("name", turns:moveCount, times: "22.22")
-
-                    let gameScene = SinglePlayerScene(size: self.size)
-                    let transition = SKTransition.doorsCloseHorizontalWithDuration(2.5)
-                    gameScene.scaleMode = SKSceneScaleMode.AspectFill
-                    self.scene!.view?.presentScene(gameScene, transition: transition)
+                    ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
                     
                 }
                 
             } else if moveCount == 42 {
                 game.gameOver()
-                
-                let gameScene = SinglePlayerScene(size: self.size)
-                let transition = SKTransition.doorsCloseHorizontalWithDuration(2.5)
-                gameScene.scaleMode = SKSceneScaleMode.AspectFill
-                self.scene!.view?.presentScene(gameScene, transition: transition)
+                ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
             }
             
         }
