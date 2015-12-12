@@ -18,11 +18,15 @@ class TwoPlayerScene: SKScene {
     var colWidth = CGFloat(0)
     var game = GameStatus()
     var move = IsValidMove()
+    
     var playerTurn = 1
     var moveNo = 1
     var p1 = "Player 1"
     var p2 = "Player 2"
     var moveLabel = SKLabelNode()
+    var pl1 = SKLabelNode(text:"")
+    var pl2 = SKLabelNode(text:"")
+    let gameStart = CFAbsoluteTimeGetCurrent()
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -40,7 +44,7 @@ class TwoPlayerScene: SKScene {
         
         //Iniitalize variables for grid. Some scaled, some not.
         self.gridLineWidth = shortSide/200
-        self.gridHeight = (shortSide / 100) * 70
+        self.gridHeight = (shortSide * 0.7)
         self.gridWidth = gridHeight
         self.colWidth = gridWidth / 7
     }
@@ -57,17 +61,76 @@ class TwoPlayerScene: SKScene {
         addText()
     }
     
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        var shortSide = self.frame.width
+        if self.frame.width > self.frame.height { shortSide = self.frame.height }
+        
+        for touch in touches {
+            
+            let location = CGPoint(x: touch.locationInView(self.view).x, y:(self.frame.height * 0.65)) //Changes Y co-ordinate to top of column
+            let col = self.columnName(location) //get column identifier
+            print(col)
+            
+            if move.checkValid(col){
+                
+                let Node = SKShapeNode(circleOfRadius: (shortSide * 0.67 / 14)) //Circle have a radius of half the column space.
+                
+                if game.hasWon(col, turn: playerTurn)
+                {
+                    var playerWon = p1
+                    if playerTurn == 2 { playerWon = p2 }
+                    
+                    game.gameWon("\(playerWon)", turns: moveNo, times: "\(gameStart)")
+                    ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
+                }
+                
+                if playerTurn == 1 {
+                    Node.fillColor = UIColor.yellowColor()
+                    playerTurn = 2
+                }
+                    
+                else if playerTurn == 2{
+                    Node.fillColor = UIColor.redColor()
+                    playerTurn = 1
+                }
+                
+                Node.position = location
+                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.97, height: Node.frame.width * 0.97))
+                Node.physicsBody?.friction = 0
+                Node.physicsBody?.restitution = 0.1
+                Node.physicsBody?.allowsRotation = false
+                Node.zPosition = 2.0
+                
+                self.addChild(Node)
+                if moveNo >= 42
+                {
+                    game.gameOver()
+                    ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
+                }
+                moveNo++
+                self.moveLabel.text = "\(moveNo - 1)"
+            }
+        }
     }
+    
+    override func didChangeSize(oldSize: CGSize) {
+        pl1.position = CGPoint(x: pl1.frame.width/2 + self.frame.width * 0.05, y: self.frame.height * 0.95)
+        pl2.position = CGPoint(x: self.frame.width - pl2.frame.width/2 - self.frame.width * 0.05, y: self.frame.height * 0.95)
+        moveLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.95)
+    }
+    
+    
+    
+    //Defined functions
     
     func columnName(pixel: CGPoint) -> String
     {
         var shortSide = self.frame.width
         if self.frame.width > self.frame.height { shortSide = self.frame.height }
         
-        let paddingSidesWidth = (self.frame.width - shortSide/100 * 70) / 2
-        let colWidth = (shortSide/100 * 70 / 7)
+        let paddingSidesWidth = (self.frame.width - shortSide * 0.7) / 2
+        let colWidth = (shortSide/10)  //shortSide/100 * 70 / 7
         
         //Gets a column name identifier for each column, based on co-ordinate position.
         switch pixel.x
@@ -97,70 +160,22 @@ class TwoPlayerScene: SKScene {
             return "failed"
         }
     }
-    
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        var shortSide = self.frame.width
-        if self.frame.width > self.frame.height { shortSide = self.frame.height }
-        
-        for touch in touches {
-            
-            let location = CGPoint(x: touch.locationInView(self.view).x, y:(self.frame.height/100 * 65)) //Take x co-ordinate of users input, changes Y co-ordinate to top of column
-            let col = self.columnName(location) //get column identifier
-            print(col)
-            
-            if move.checkValid(col){
-                
-                let Node = SKShapeNode(circleOfRadius: (shortSide/100 * 67 / 7)/2) //Circle have a radius of half the column space.
-                
-                if game.hasWon(col, turn: playerTurn)
-                {
-                    var playerWon = p1
-                    if playerTurn == 2 { playerWon = p2 }
-                    
-                    game.gameWon("\(playerWon)", turns: moveNo, times: "0 seconds!")
-                }
-                
-                if playerTurn == 1 {
-                    Node.fillColor = UIColor.yellowColor()
-                    playerTurn = 2
-                }
-                    
-                else if playerTurn == 2{
-                    Node.fillColor = UIColor.redColor()
-                    playerTurn = 1
-                }
-                
-                Node.position = location
-                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.97, height: Node.frame.width * 0.97))
-                Node.physicsBody?.friction = 0
-                Node.physicsBody?.restitution = 0.1
-                Node.physicsBody?.allowsRotation = false
-                Node.zPosition = 3.0
-                
-                self.addChild(Node)
-                if moveNo == 42 { game.gameOver() }
-                moveNo++
-                self.moveLabel.text = "\(moveNo - 1)"
-            }
-        }
-    }
-    
+
     
     func drawGrid()
     {
         // Code to create columns
+        
         for index in 1 ... 8 {
             
             let wallNode = SKShapeNode(rectOfSize: CGSize(width: gridLineWidth, height: gridHeight))
             
             wallNode.fillColor = UIColor.whiteColor()
-            wallNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridLineWidth * 0.5, height: gridHeight))
+            wallNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridLineWidth/2, height: gridHeight))
             wallNode.physicsBody?.friction = 0
             wallNode.physicsBody?.allowsRotation = false
             wallNode.physicsBody?.dynamic = false
-            wallNode.zPosition = 2.0
+            wallNode.zPosition = 1.0
             wallNode.position = CGPointMake(CGFloat(index - 1) * CGFloat(colWidth) + gridLineWidth/2, wallNode.frame.height/2)
             
             self.addChild(wallNode)
@@ -170,7 +185,7 @@ class TwoPlayerScene: SKScene {
         let rowNode = SKShapeNode(rectOfSize: CGSize(width: gridWidth, height: gridLineWidth))
         
         rowNode.fillColor = UIColor.whiteColor()
-        rowNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridWidth, height: gridLineWidth * 0.5))
+        rowNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: gridWidth, height: gridLineWidth/2))
         rowNode.physicsBody?.friction = 0
         rowNode.physicsBody?.allowsRotation = false
         rowNode.physicsBody?.dynamic = false
@@ -185,7 +200,7 @@ class TwoPlayerScene: SKScene {
             let otherRows = SKShapeNode(rectOfSize: CGSize(width: gridWidth, height: gridLineWidth))
             
             otherRows.fillColor = UIColor.whiteColor()
-            otherRows.zPosition = 2.0
+            otherRows.zPosition = 1.0
             otherRows.position = CGPointMake(rowNode.frame.width/2 + gridLineWidth/2, CGFloat(rowIndex) * CGFloat(colWidth))
             
             self.addChild(otherRows)
@@ -196,9 +211,9 @@ class TwoPlayerScene: SKScene {
     {
         let gameBoard = SKSpriteNode(imageNamed:"grid2")
         
-        gameBoard.size = CGSizeMake(shortSide/100 * 70, shortSide/100 * 70)
+        gameBoard.size = CGSizeMake(shortSide * 0.7, shortSide * 0.7)
         gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame) + shortSide/200, y: CGRectGetMidY(self.frame))
-        gameBoard.zPosition = 100
+        gameBoard.zPosition = 3.0
         
         self.addChild(gameBoard)
     }
@@ -208,45 +223,27 @@ class TwoPlayerScene: SKScene {
     {
         for node in self.children
         {
-            node.position.x =  node.position.x + (self.frame.width - (shortSide/100 * 70)) / 2
-            node.position.y = node.position.y + (self.frame.height - (shortSide/100 * 70)) / 2
-        }
-    }
-    
-    
-    func recenterGrid(new: CGSize, old: CGSize)
-    {
-        var shortSide = old.width
-        if old.width > old.height { shortSide = old.height }
-        
-        for node in self.children
-        {
-            //remove old padding
-            node.position.x =  node.position.x - (old.width - (shortSide/100 * 70)) / 2
-            node.position.y = node.position.y - (old.height - (shortSide/100 * 70)) / 2
-            
-            //apply new
-            node.position.x =  node.position.x + (new.width - (shortSide/100 * 70)) / 2
-            node.position.y = node.position.y + (new.height - (shortSide/100 * 70)) / 2
+            node.position.x =  node.position.x + (self.frame.width - (shortSide * 0.7)) / 2
+            node.position.y = node.position.y + (self.frame.height - (shortSide * 0.7)) / 2
         }
     }
     
     func addText()
     {
-        let pl1 = SKLabelNode(text: p1)
-        pl1.position = CGPoint(x: pl1.frame.width/2, y: self.frame.height * 0.95)
+        pl1 = SKLabelNode(text: p1)
+        pl1.position = CGPoint(x: pl1.frame.width/2 + self.frame.width * 0.05, y: self.frame.height * 0.95)
         pl1.fontSize = 24
         pl1.color = UIColor.blackColor()
         pl1.fontColor = UIColor.blackColor()
-        pl1.zPosition = 102
+        pl1.zPosition = 4.0
         self.addChild(pl1)
         
-        let pl2 = SKLabelNode(text: p2)
-        pl2.position = CGPoint(x: self.frame.width - pl1.frame.width/2, y: self.frame.height * 0.95)
+        pl2 = SKLabelNode(text: p2)
+        pl2.position = CGPoint(x: self.frame.width - pl2.frame.width/2 - self.frame.width * 0.05, y: self.frame.height * 0.95)
         pl2.fontSize = 24
         pl2.color = UIColor.blackColor()
         pl2.fontColor = UIColor.blackColor()
-        pl2.zPosition = 102
+        pl2.zPosition = 4.0
         self.addChild(pl2)
         
         moveLabel.text = "\(moveNo - 1)"
@@ -254,7 +251,8 @@ class TwoPlayerScene: SKScene {
         moveLabel.fontSize = 24
         moveLabel.color = UIColor.blackColor()
         moveLabel.fontColor = UIColor.blackColor()
-        moveLabel.zPosition = 102
+        moveLabel.zPosition = 4.0
         self.addChild(moveLabel)
     }
 }
+    
