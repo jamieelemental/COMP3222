@@ -180,8 +180,7 @@ class GameStatus {
     func gameWon(name: String, turns: Int,times: String){
         let alert = UIAlertView()
         alert.title = "GameWon"
-        alert.message = "You have won"
-        //let textField = alert.textFieldAtIndex(0)
+        alert.message = "You have won  \(name)"
         alert.addButtonWithTitle("Submit")
         alert.show()
         
