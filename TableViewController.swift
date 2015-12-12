@@ -6,23 +6,51 @@
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import CoreData
 
-class TableViewController: UIViewController {
+class TableViewController: UIViewController, UITableViewDataSource{
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func backToHome(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
     var people = [NSManagedObject]()
-    var names = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "\"Leaderboard\""
+        title = "\"This List\""
         tableView.registerClass(UITableViewCell.self,
             forCellReuseIdentifier: "Cell")
+    }
+    
+
+    func tableView(tableView: UITableView,
+        numberOfRowsInSection section: Int) -> Int {
+        return people.count
+    }
+    
+    
+    func tableView(tableView: UITableView,
+        cellForRowAtIndexPath
+        indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
+
+        let person = people[indexPath.row]
+        
+        cell!.textLabel!.text = "\((person.valueForKey("name") as? String)!) - Turns: \((person.valueForKey("turns") as? Int)!)  Time: \((person.valueForKey("time") as? String)!) "
+        
+        //print((person.valueForKey("name") as? String)! + " test")
+        
+        return cell!
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         //1
         let appDelegate =
@@ -41,30 +69,28 @@ class TableViewController: UIViewController {
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
-        
-        
-        
-        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
-    func tableView(tableView: UITableView,
-        numberOfRowsInSection section: Int) -> Int {
-            return names.count
-    }
-    
-    func tableView(tableView: UITableView,
-        cellForRowAtIndexPath
-        indexPath: NSIndexPath) -> UITableViewCell {
-            
-            let cell =
-            tableView.dequeueReusableCellWithIdentifier("Cell")
-            
-            cell!.textLabel!.text = names[indexPath.row]
-            
-            return cell!
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
