@@ -55,9 +55,9 @@ class LeaderBoard {
         print("Database Size: ",players.count)
         
         for index in players {
-            print(index.valueForKey("name") as? String)
-            print(index.valueForKey("turns") as? Int)
-            print(index.valueForKey("time") as? String)
+            print(index.valueForKey("name") as! String)
+            print(index.valueForKey("turns") as! Int)
+            print(index.valueForKey("time") as! String)
             
         }
     }

@@ -23,6 +23,7 @@ class SinglePlayerScene: SKScene {
     let leaderBoard = LeaderBoard()
     var moveCount = 0
     var gameBoard = SKSpriteNode()
+    let a = CFAbsoluteTimeGetCurrent()
     
     // Create Music player
     var bgMusicPlayer = AVAudioPlayer()
@@ -32,11 +33,7 @@ class SinglePlayerScene: SKScene {
         
         //let bgMusicURL = NSBundle.mainBundle().URLForResource("BGMusic", withExtension: "mp3")
         //bgMusicPlayer = AVAudioPlayer(contentsOfURL: bgMusicURL, error: nil)
-        
-        
-        //let backgroundImage = SKSpriteNode(imageNamed: "bg")
-        //backgroundImage.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
-        //self.addChild(backgroundImage)
+
         self.backgroundColor = UIColor.darkGrayColor()
         
         // Control Gravity
@@ -48,18 +45,15 @@ class SinglePlayerScene: SKScene {
         self.physicsBody?.friction = 1
         
         // Code to generate a playable area - to ensure compatability on multiple devices.
-        //let gameBoard = SKSpriteNode(color: SKColor.whiteColor(), size: CGSizeMake(self.frame.size.width/1.2, self.frame.size.width/2))
         gameBoard = SKSpriteNode(imageNamed:"Connect4Board2")
         gameBoard.size = CGSizeMake(self.frame.size.width/1.4, self.frame.size.width/2.4)
         
         gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         gameBoard.zPosition = 100
         self.addChild(gameBoard)
-        //print("Height: ", gameBoard.size.height, "Width: ", gameBoard.size.width )
         
-        // Code to create columns.
+        // Code to create columns & ball factorys.
         let walls = 8
-        // Code to generate ball factorys
         let ballFacts = 7
         var a = gameBoard.size.width/gameBoard.size.width
         var b = gameBoard.size.width/gameBoard.size.width
@@ -68,13 +62,8 @@ class SinglePlayerScene: SKScene {
         for _ in 1 ... walls {
             let wall = SKSpriteNode(imageNamed: "wall")
             wall.size.height = gameBoard.size.height
-            //wall.anchorPoint = CGPointMake(0,0)
-            
             wall.position = CGPointMake(0 - gameBoard.size.width/2 + a,0)
             wall.size.width = gameBoard.size.width/18
-            
-            
-            
             wall.physicsBody = SKPhysicsBody(rectangleOfSize: wall.frame.size)
             wall.physicsBody?.allowsRotation = false
             wall.name = wallCategoryName
@@ -82,7 +71,6 @@ class SinglePlayerScene: SKScene {
             wall.zPosition = 0
             
             a = a + gameBoard.size.width/7
-            //print(a)
             gameBoard.addChild(wall)
         }
         
@@ -110,7 +98,7 @@ class SinglePlayerScene: SKScene {
             ballMaker.physicsBody?.dynamic = false
             ballMaker.size.width = gameBoard.size.width/13
             ballMaker.size.height = gameBoard.size.width/13
-            ballMaker.position = CGPointMake(0 - gameBoard.size.width/2 + gameBoard.size.width/14 + b,gameBoard.size.height/2)
+            ballMaker.position = CGPointMake(0 - gameBoard.size.width/2 + gameBoard.size.width/14 + b,gameBoard.size.height/2 - 5)
             ballMaker.zPosition = 1.0
             b = b + gameBoard.size.width/7
             
@@ -135,7 +123,7 @@ class SinglePlayerScene: SKScene {
             {
                 // Check if User has won
                 let piece = SKSpriteNode()
-                let Node = SKShapeNode(circleOfRadius: gameBoard.size.width/24)
+                let Node = SKShapeNode(circleOfRadius: gameBoard.size.width/25)
                 if turn == 1 {
                         Node.fillColor = UIColor.blueColor()
                         turn = 2
@@ -146,25 +134,19 @@ class SinglePlayerScene: SKScene {
                 piece.addChild(Node)
                 piece.name = redCategoryName
                 piece.position = positionInScene
+                piece.position.y = piece.position.y-4
                 piece.zPosition = 1.0
-                
                 piece.physicsBody = SKPhysicsBody(circleOfRadius: Node.frame.size.width/2)
                 piece.physicsBody?.friction = 0
                 piece.physicsBody?.restitution = 0.1
                 piece.physicsBody?.allowsRotation = false
                 self.addChild(piece)
                 moveCount++
-                //print(moveCount)
                 
                 if game.hasWon(name, turn: turn) == true {
                     
-                    game.gameWon("name", turns:turn, times: "22.22")
-                    
-                    // Save to LeaderBoard
-                    //leaderBoard.Save("Dan", turns: moveCount, time: "21.22")
-                    //leaderBoard.printCoreDataforTesting()
-                    
-                    
+                    game.gameWon("name", turns:moveCount, times: "22.22")
+
                     let gameScene = SinglePlayerScene(size: self.size)
                     let transition = SKTransition.doorsCloseHorizontalWithDuration(2.5)
                     gameScene.scaleMode = SKSceneScaleMode.AspectFill
@@ -186,7 +168,16 @@ class SinglePlayerScene: SKScene {
         }
     }
     
+    // Method for tracking the Game Length.
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        let b = CFAbsoluteTimeGetCurrent()
+        print("Current Time: ", b, " - StartTime: ", a)
+        var c = secondsToHoursMinutesSeconds(Int(b)-Int(a))
+        print("GameLength: ", c.0,c.1,c.2)
+    }
+    
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 }
