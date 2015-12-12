@@ -66,37 +66,6 @@ class TwoPlayerViewController: UIViewController {
         scene.size = newSize
     }
     
-    func centerGrid()
-    {
-        var shortSide = view.frame.width
-        if view.frame.width > view.frame.height { shortSide = view.frame.height }
-        
-        
-        for node in scene.children
-        {
-            node.position.x =  node.position.x + (view.frame.width - (shortSide/100 * 70)) / 2
-            node.position.y = node.position.y + (view.frame.height - (shortSide/100 * 70)) / 2
-        }
-    }
-    
-    func recenterGrid(new: CGSize, old: CGSize)
-    {
-        
-        var shortSide = old.width
-        if old.width > old.height { shortSide = old.height }
-        
-        for node in scene.children
-        {
-            //remove old padding
-            node.position.x =  node.position.x - (old.width - (shortSide/100 * 70)) / 2
-            node.position.y = node.position.y - (old.height - (shortSide/100 * 70)) / 2
-            
-            //apply new
-            node.position.x =  node.position.x + (new.width - (shortSide/100 * 70)) / 2
-            node.position.y = node.position.y + (new.height - (shortSide/100 * 70)) / 2
-        }
-    }
-    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone
         {
@@ -151,8 +120,41 @@ class TwoPlayerViewController: UIViewController {
             }
         }
     }
+
+    
+    func centerGrid()
+    {
+        var shortSide = view.frame.width
+        if view.frame.width > view.frame.height { shortSide = view.frame.height }
+        
+        
+        for node in scene.children
+        {
+            node.position.x =  node.position.x + (view.frame.width - (shortSide/100 * 70)) / 2
+            node.position.y = node.position.y + (view.frame.height - (shortSide/100 * 70)) / 2
+        }
+    }
     
     
+    func recenterGrid(new: CGSize, old: CGSize)
+    {
+        
+        var shortSide = old.width
+        if old.width > old.height { shortSide = old.height }
+        
+        for node in scene.children
+        {
+            //remove old padding
+            node.position.x =  node.position.x - (old.width - (shortSide/100 * 70)) / 2
+            node.position.y = node.position.y - (old.height - (shortSide/100 * 70)) / 2
+            
+            //apply new
+            node.position.x =  node.position.x + (new.width - (shortSide/100 * 70)) / 2
+            node.position.y = node.position.y + (new.height - (shortSide/100 * 70)) / 2
+        }
+    }
+    
+
     func columnName(pixel: CGPoint) -> String
     {
         var shortSide = view.frame.width
@@ -190,6 +192,7 @@ class TwoPlayerViewController: UIViewController {
             return "failed"
         }
     }
+    
     
     func applyGridOverlay()
     {
