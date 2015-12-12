@@ -119,13 +119,13 @@
 		7D93332B1C0C59EF007F7861 /* Connect Four Advance */ = {
 			isa = PBXGroup;
 			children = (
-				7D3A27501C1C837D00C28407 /* TableViewController.swift */,
 				C2CBDFB61C1C3579008E9E32 /* GameLogic */,
 				7D9333691C0C5F6C007F7861 /* TwoPlayer */,
 				7D9333661C0C5E62007F7861 /* SinglePlayer */,
 				7D93332C1C0C59EF007F7861 /* AppDelegate.swift */,
 				C22AB8BF1C1B731200FA76D6 /* LeaderBoard.xcdatamodeld */,
 				7D9333341C0C59EF007F7861 /* Main.storyboard */,
+				7D3A27501C1C837D00C28407 /* TableViewController.swift */,
 				7D93335E1C0C5B5D007F7861 /* MenuViewController.swift */,
 				7D9333371C0C59EF007F7861 /* Assets.xcassets */,
 				7D9333391C0C59EF007F7861 /* LaunchScreen.storyboard */,
