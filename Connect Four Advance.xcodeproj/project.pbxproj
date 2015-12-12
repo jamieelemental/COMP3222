@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D3A27511C1C837D00C28407 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3A27501C1C837D00C28407 /* TableViewController.swift */; };
 		7D7B55621C0DD550004311A6 /* TwoPlayerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B55601C0DD550004311A6 /* TwoPlayerScene.swift */; };
 		7D7B55631C0DD550004311A6 /* TwoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B55611C0DD550004311A6 /* TwoPlayerViewController.swift */; };
 		7D93332D1C0C59EF007F7861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D93332C1C0C59EF007F7861 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D3A27501C1C837D00C28407 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = ../TableViewController.swift; sourceTree = "<group>"; };
 		7D7B55601C0DD550004311A6 /* TwoPlayerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPlayerScene.swift; sourceTree = "<group>"; };
 		7D7B55611C0DD550004311A6 /* TwoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPlayerViewController.swift; sourceTree = "<group>"; };
 		7D9333291C0C59EF007F7861 /* Connect Four Advance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Connect Four Advance.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 		7D93332B1C0C59EF007F7861 /* Connect Four Advance */ = {
 			isa = PBXGroup;
 			children = (
+				7D3A27501C1C837D00C28407 /* TableViewController.swift */,
 				C2CBDFB61C1C3579008E9E32 /* GameLogic */,
 				7D9333691C0C5F6C007F7861 /* TwoPlayer */,
 				7D9333661C0C5E62007F7861 /* SinglePlayer */,
@@ -315,6 +318,7 @@
 			files = (
 				7D7B55621C0DD550004311A6 /* TwoPlayerScene.swift in Sources */,
 				C22AB8C31C1B753D00FA76D6 /* LeaderBoard.swift in Sources */,
+				7D3A27511C1C837D00C28407 /* TableViewController.swift in Sources */,
 				C2B70AF61C0E0B4C00390E48 /* GameStatus.swift in Sources */,
 				C2B70AF81C0E17D900390E48 /* Ai.swift in Sources */,
 				C2B70AF41C0DEB6900390E48 /* IsValidMove.swift in Sources */,
