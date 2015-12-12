@@ -16,6 +16,10 @@ class TwoPlayerScene: SKScene {
     var gridHeight = CGFloat(0)
     var gridWidth = CGFloat(0)
     var colWidth = CGFloat(0)
+    var game = GameStatus()
+    var move = IsValidMove()
+    var playerTurn = 1
+    var moveNo = 1
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -36,7 +40,6 @@ class TwoPlayerScene: SKScene {
         self.gridHeight = (shortSide / 100) * 70
         self.gridWidth = gridHeight
         self.colWidth = gridWidth / 7
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,11 +49,97 @@ class TwoPlayerScene: SKScene {
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.whiteColor()
         drawGrid()
+        centerGrid()
+        applyGridOverlay()
     }
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
+    func columnName(pixel: CGPoint) -> String
+    {
+        var shortSide = self.frame.width
+        if self.frame.width > self.frame.height { shortSide = self.frame.height }
+        
+        let paddingSidesWidth = (self.frame.width - shortSide/100 * 70) / 2
+        let colWidth = (shortSide/100 * 70 / 7)
+        
+        //Gets a column name identifier for each column, based on co-ordinate position.
+        switch pixel.x
+        {
+            
+        case let x where x >= paddingSidesWidth && x <= paddingSidesWidth + colWidth:
+            return "buttonFactory1"
+            
+        case let x where x >= paddingSidesWidth + colWidth && x <= paddingSidesWidth + 2 * colWidth:
+            return "buttonFactory2"
+            
+        case let x where x >= paddingSidesWidth + 2 * colWidth && x <= paddingSidesWidth + 3 * colWidth:
+            return "buttonFactory3"
+            
+        case let x where x >= paddingSidesWidth + 3 * colWidth && x <= paddingSidesWidth + 4 * colWidth:
+            return "buttonFactory4"
+            
+        case let x where x >= paddingSidesWidth + 4 * colWidth && x <= paddingSidesWidth + 5 * colWidth:
+            return "buttonFactory5"
+            
+        case let x where x >= paddingSidesWidth + 5 * colWidth && x <= paddingSidesWidth + 6 * colWidth:
+            return "buttonFactory6"
+            
+        case let x where x >= paddingSidesWidth + 6 * colWidth  && x <= paddingSidesWidth + 7 * colWidth:
+            return "buttonFactory7"
+        default:
+            return "failed"
+        }
+    }
+    
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        var shortSide = self.frame.width
+        if self.frame.width > self.frame.height { shortSide = self.frame.height }
+        
+        for touch in touches {
+            
+            let location = CGPoint(x: touch.locationInView(self.view).x, y:(self.frame.height/100 * 65)) //Take x co-ordinate of users input, changes Y co-ordinate to top of column
+            
+            let col = self.columnName(location) //get column identifier
+            print(col)
+            
+            if move.checkValid(col){
+                
+                let Node = SKShapeNode(circleOfRadius: (shortSide/100 * 67 / 7)/2) //Circle have a radius of half the column space.
+                
+                if game.hasWon(col, turn: playerTurn)
+                {
+                    game.gameWon("Player \(playerTurn)", turns: moveNo, times: "0 seconds!")
+                }
+                
+                if playerTurn == 1 {
+                    Node.fillColor = UIColor.yellowColor()
+                    playerTurn = 2
+                }
+                    
+                else if playerTurn == 2{
+                    Node.fillColor = UIColor.redColor()
+                    playerTurn = 1
+                }
+                
+                Node.position = location
+                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.97, height: Node.frame.width * 0.97))
+                Node.physicsBody?.friction = 0
+                Node.physicsBody?.restitution = 0.1
+                Node.physicsBody?.allowsRotation = false
+                Node.zPosition = 3.0
+                
+                self.addChild(Node)
+                if moveNo == 42 { game.gameOver() }
+                moveNo++
+            }
+        }
+    }
+    
     
     func drawGrid()
     {
@@ -94,7 +183,44 @@ class TwoPlayerScene: SKScene {
             
             self.addChild(otherRows)
         }
+    }
+    
+    func applyGridOverlay()
+    {
+        let gameBoard = SKSpriteNode(imageNamed:"grid2")
         
+        gameBoard.size = CGSizeMake(shortSide/100 * 70, shortSide/100 * 70)
+        gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame) + shortSide/200, y: CGRectGetMidY(self.frame))
+        gameBoard.zPosition = 100
         
+        self.addChild(gameBoard)
+    }
+    
+    
+    func centerGrid()
+    {
+        for node in self.children
+        {
+            node.position.x =  node.position.x + (self.frame.width - (shortSide/100 * 70)) / 2
+            node.position.y = node.position.y + (self.frame.height - (shortSide/100 * 70)) / 2
+        }
+    }
+    
+    
+    func recenterGrid(new: CGSize, old: CGSize)
+    {
+        var shortSide = old.width
+        if old.width > old.height { shortSide = old.height }
+        
+        for node in self.children
+        {
+            //remove old padding
+            node.position.x =  node.position.x - (old.width - (shortSide/100 * 70)) / 2
+            node.position.y = node.position.y - (old.height - (shortSide/100 * 70)) / 2
+            
+            //apply new
+            node.position.x =  node.position.x + (new.width - (shortSide/100 * 70)) / 2
+            node.position.y = node.position.y + (new.height - (shortSide/100 * 70)) / 2
+        }
     }
 }
