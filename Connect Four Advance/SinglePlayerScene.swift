@@ -20,6 +20,7 @@ class SinglePlayerScene: SKScene {
     var wallNumber = 1
     let valid = IsValidMove()
     let game = GameStatus()
+    let leaderBoard = LeaderBoard()
     var moveCount = 0
     var gameBoard = SKSpriteNode()
     
@@ -54,7 +55,7 @@ class SinglePlayerScene: SKScene {
         gameBoard.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         gameBoard.zPosition = 100
         self.addChild(gameBoard)
-        print("Height: ", gameBoard.size.height, "Width: ", gameBoard.size.width )
+        //print("Height: ", gameBoard.size.height, "Width: ", gameBoard.size.width )
         
         // Code to create columns.
         let walls = 8
@@ -81,7 +82,7 @@ class SinglePlayerScene: SKScene {
             wall.zPosition = 0
             
             a = a + gameBoard.size.width/7
-            print(a)
+            //print(a)
             gameBoard.addChild(wall)
         }
         
@@ -153,14 +154,16 @@ class SinglePlayerScene: SKScene {
                 piece.physicsBody?.allowsRotation = false
                 self.addChild(piece)
                 moveCount++
-                print(moveCount)
+                //print(moveCount)
                 
                 if game.hasWon(name, turn: turn) == true {
-                    let alert = UIAlertView()
-                    alert.title = "GameWon"
-                    alert.message = " Click to restart"
-                    alert.addButtonWithTitle("Ok")
-                    alert.show()
+                    
+                    game.gameWon(turn, times: "22.22")
+                    
+                    // Save to LeaderBoard
+                    //leaderBoard.Save("Dan", turns: moveCount, time: "21.22")
+                    //leaderBoard.printCoreDataforTesting()
+                    
                     
                     let gameScene = SinglePlayerScene(size: self.size)
                     let transition = SKTransition.doorsCloseHorizontalWithDuration(2.5)
@@ -170,11 +173,7 @@ class SinglePlayerScene: SKScene {
                 }
                 
             } else if moveCount == 42 {
-                let alert = UIAlertView()
-                alert.title = "GameOver"
-                alert.message = " Click to restart"
-                alert.addButtonWithTitle("Ok")
-                alert.show()
+                game.gameOver()
                 
                 let gameScene = SinglePlayerScene(size: self.size)
                 let transition = SKTransition.doorsCloseHorizontalWithDuration(2.5)
