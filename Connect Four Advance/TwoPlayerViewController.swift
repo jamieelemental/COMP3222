@@ -12,13 +12,20 @@ import SpriteKit
 class TwoPlayerViewController: UIViewController {
     
     var scene = SKScene()
+    var player1 = "Player 1"
+    var player2 = "Player 2"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Two Player loaded")
         
-        scene = TwoPlayerScene(size: view.bounds.size)
+        let TwoPlay = TwoPlayerScene(size: view.bounds.size)
+        TwoPlay.p1 = player1
+        TwoPlay.p2 = player2
+        
+        scene = TwoPlay //TwoPlayerScene(size: view.bounds.size)
         scene.scaleMode = .AspectFit
+        
         
         // Configure the view.
         let skView = self.view as! SKView
@@ -26,6 +33,8 @@ class TwoPlayerViewController: UIViewController {
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.presentScene(scene)
+        
+        print(player1, player2)
     }
     
     override func shouldAutorotate() -> Bool {

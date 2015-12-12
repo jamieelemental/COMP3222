@@ -56,48 +56,87 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8UH-RM-O2m">
-                                <rect key="frame" x="256" y="285" width="89" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two Players" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mh3-jQ-Dc5">
+                                <rect key="frame" x="187" y="234" width="108" height="31"/>
                                 <animations/>
-                                <state key="normal" title="Single Player"/>
-                                <connections>
-                                    <action selector="changeOri:" destination="LAZ-h3-7Gb" eventType="touchUpInside" id="8Az-fC-AeW"/>
-                                    <segue destination="E25-Bf-CDQ" kind="show" id="Q5L-XY-Aly"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0X6-3Z-uQY">
-                                <rect key="frame" x="263" y="323" width="75" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="108" id="EaW-MS-iC3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Q3V-2T-LaF">
+                                <rect key="frame" x="364" y="234" width="51" height="31"/>
                                 <animations/>
-                                <state key="normal" title="Two Player"/>
                                 <connections>
-                                    <action selector="setOrientation:" destination="LAZ-h3-7Gb" eventType="touchUpInside" id="xNs-hJ-01m"/>
-                                    <segue destination="9xY-cj-tTi" kind="show" id="Oak-rf-0cE"/>
+                                    <action selector="SwitchChanged:" destination="LAZ-h3-7Gb" eventType="valueChanged" id="1G2-OA-Pt7"/>
                                 </connections>
-                            </button>
+                            </switch>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGT-QN-g7q">
+                                <rect key="frame" x="187" y="158" width="226" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hp3-go-EId">
+                                <rect key="frame" x="187" y="196" width="226" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMQ-KA-Cjp">
-                                <rect key="frame" x="253" y="361" width="95" height="30"/>
+                                <rect key="frame" x="253" y="301" width="95" height="29"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="Aqz-Zf-szY"/>
+                                </constraints>
                                 <state key="normal" title="Leaderboards"/>
                                 <connections>
                                     <segue destination="z5N-qQ-uLl" kind="show" id="gdP-Xj-BOG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFE-kl-YEA">
+                                <rect key="frame" x="187" y="273" width="226" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="SubmitButton:" destination="LAZ-h3-7Gb" eventType="touchUpInside" id="QAO-rf-vFg"/>
                                 </connections>
                             </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8UH-RM-O2m" firstAttribute="centerX" secondItem="nSK-Fb-7fi" secondAttribute="centerX" id="Gyc-Eg-Vzd"/>
-                            <constraint firstItem="fMQ-KA-Cjp" firstAttribute="top" secondItem="0X6-3Z-uQY" secondAttribute="bottom" constant="8" symbolic="YES" id="VpY-Ex-PjQ"/>
-                            <constraint firstItem="8UH-RM-O2m" firstAttribute="centerY" secondItem="nSK-Fb-7fi" secondAttribute="centerY" id="gxJ-sR-ka1"/>
-                            <constraint firstItem="fMQ-KA-Cjp" firstAttribute="centerX" secondItem="0X6-3Z-uQY" secondAttribute="centerX" id="pti-ab-J2Z"/>
-                            <constraint firstItem="8UH-RM-O2m" firstAttribute="centerX" secondItem="0X6-3Z-uQY" secondAttribute="centerX" id="sVg-8T-dcz"/>
-                            <constraint firstItem="0X6-3Z-uQY" firstAttribute="top" secondItem="8UH-RM-O2m" secondAttribute="bottom" constant="8" symbolic="YES" id="yyv-0m-hq2"/>
+                            <constraint firstItem="DFE-kl-YEA" firstAttribute="trailing" secondItem="Q3V-2T-LaF" secondAttribute="trailing" id="0Eg-Ql-Wyg"/>
+                            <constraint firstItem="Q3V-2T-LaF" firstAttribute="trailing" secondItem="Hp3-go-EId" secondAttribute="trailing" id="1mb-ar-hNy"/>
+                            <constraint firstItem="Mh3-jQ-Dc5" firstAttribute="top" secondItem="Hp3-go-EId" secondAttribute="bottom" constant="8" symbolic="YES" id="9vX-gE-otZ"/>
+                            <constraint firstItem="DFE-kl-YEA" firstAttribute="leading" secondItem="Mh3-jQ-Dc5" secondAttribute="leading" id="Bln-oF-xMZ"/>
+                            <constraint firstItem="DFE-kl-YEA" firstAttribute="top" secondItem="Q3V-2T-LaF" secondAttribute="bottom" constant="8" symbolic="YES" id="EGY-jb-59J"/>
+                            <constraint firstItem="DFE-kl-YEA" firstAttribute="top" secondItem="Mh3-jQ-Dc5" secondAttribute="bottom" constant="8" symbolic="YES" id="JqT-hc-OKP"/>
+                            <constraint firstItem="fMQ-KA-Cjp" firstAttribute="centerX" secondItem="nSK-Fb-7fi" secondAttribute="centerX" id="OCk-tk-h7y"/>
+                            <constraint firstItem="fMQ-KA-Cjp" firstAttribute="top" secondItem="Mh3-jQ-Dc5" secondAttribute="bottom" constant="36" id="TF8-vn-pQm"/>
+                            <constraint firstItem="Hp3-go-EId" firstAttribute="top" secondItem="fGT-QN-g7q" secondAttribute="bottom" constant="8" symbolic="YES" id="WOp-vV-Oyp"/>
+                            <constraint firstItem="Q3V-2T-LaF" firstAttribute="top" secondItem="Mh3-jQ-Dc5" secondAttribute="top" id="cko-oA-5nD"/>
+                            <constraint firstItem="Q3V-2T-LaF" firstAttribute="leading" secondItem="Mh3-jQ-Dc5" secondAttribute="trailing" constant="69" id="idw-sd-MwK"/>
+                            <constraint firstItem="Hp3-go-EId" firstAttribute="leading" secondItem="Mh3-jQ-Dc5" secondAttribute="leading" id="isj-Bw-z9W"/>
+                            <constraint firstItem="fMQ-KA-Cjp" firstAttribute="centerX" secondItem="DFE-kl-YEA" secondAttribute="centerX" id="jxd-qj-xfT"/>
+                            <constraint firstItem="Hp3-go-EId" firstAttribute="leading" secondItem="fGT-QN-g7q" secondAttribute="leading" id="sAh-bj-Kgn"/>
+                            <constraint firstItem="fGT-QN-g7q" firstAttribute="top" secondItem="EXX-eM-4Hy" secondAttribute="bottom" constant="138" id="t3c-WD-iP5"/>
+                            <constraint firstItem="fGT-QN-g7q" firstAttribute="trailing" secondItem="Hp3-go-EId" secondAttribute="trailing" id="wEJ-8d-O4D"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="PlayerOneText" destination="fGT-QN-g7q" id="KKj-g4-r6h"/>
+                        <outlet property="PlayerTwoText" destination="Hp3-go-EId" id="RgM-ia-KLU"/>
+                        <outlet property="TwoPlayerSwitch" destination="Q3V-2T-LaF" id="MFB-q9-omq"/>
+                        <segue destination="E25-Bf-CDQ" kind="show" identifier="OnePlayer" id="6Fx-Pg-6c4"/>
+                        <segue destination="9xY-cj-tTi" kind="show" identifier="TwoPlayer" id="jFF-8l-SVg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLu-ys-FZw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-209" y="644"/>
+            <point key="canvasLocation" x="-294" y="670"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="fkx-22-8RB">

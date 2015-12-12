@@ -20,6 +20,9 @@ class TwoPlayerScene: SKScene {
     var move = IsValidMove()
     var playerTurn = 1
     var moveNo = 1
+    var p1 = "Player 1"
+    var p2 = "Player 2"
+    var moveLabel = SKLabelNode()
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -51,6 +54,7 @@ class TwoPlayerScene: SKScene {
         drawGrid()
         centerGrid()
         applyGridOverlay()
+        addText()
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -112,7 +116,10 @@ class TwoPlayerScene: SKScene {
                 
                 if game.hasWon(col, turn: playerTurn)
                 {
-                    game.gameWon("Player \(playerTurn)", turns: moveNo, times: "0 seconds!")
+                    var playerWon = p1
+                    if playerTurn == 2 { playerWon = p2 }
+                    
+                    game.gameWon("\(playerWon)", turns: moveNo, times: "0 seconds!")
                 }
                 
                 if playerTurn == 1 {
@@ -135,6 +142,7 @@ class TwoPlayerScene: SKScene {
                 self.addChild(Node)
                 if moveNo == 42 { game.gameOver() }
                 moveNo++
+                self.moveLabel.text = "\(moveNo - 1)"
             }
         }
     }
@@ -221,5 +229,32 @@ class TwoPlayerScene: SKScene {
             node.position.x =  node.position.x + (new.width - (shortSide/100 * 70)) / 2
             node.position.y = node.position.y + (new.height - (shortSide/100 * 70)) / 2
         }
+    }
+    
+    func addText()
+    {
+        let pl1 = SKLabelNode(text: p1)
+        pl1.position = CGPoint(x: pl1.frame.width/2, y: self.frame.height * 0.95)
+        pl1.fontSize = 24
+        pl1.color = UIColor.blackColor()
+        pl1.fontColor = UIColor.blackColor()
+        pl1.zPosition = 102
+        self.addChild(pl1)
+        
+        let pl2 = SKLabelNode(text: p2)
+        pl2.position = CGPoint(x: self.frame.width - pl1.frame.width/2, y: self.frame.height * 0.95)
+        pl2.fontSize = 24
+        pl2.color = UIColor.blackColor()
+        pl2.fontColor = UIColor.blackColor()
+        pl2.zPosition = 102
+        self.addChild(pl2)
+        
+        moveLabel.text = "\(moveNo - 1)"
+        moveLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.95)
+        moveLabel.fontSize = 24
+        moveLabel.color = UIColor.blackColor()
+        moveLabel.fontColor = UIColor.blackColor()
+        moveLabel.zPosition = 102
+        self.addChild(moveLabel)
     }
 }
