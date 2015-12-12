@@ -162,7 +162,6 @@ class TwoPlayerViewController: UIViewController {
         
         let paddingSidesWidth = (view.frame.width - shortSide/100 * 70) / 2
         let colWidth = (shortSide/100 * 70 / 7)
-        let colGridLine = shortSide/100
         
         //Gets a column name identifier for each column, based on co-ordinate position.
         switch pixel.x
@@ -196,7 +195,6 @@ class TwoPlayerViewController: UIViewController {
     
     func applyGridOverlay()
     {
-        
         var shortSide = view.frame.width
         if view.frame.width > view.frame.height { shortSide = view.frame.height }
         
