@@ -12,6 +12,8 @@ import UIKit
 
 class LeaderBoard {
     
+    
+    // Method for saving Users to database.
     func Save(name: String, turns: Int, time: String) -> Bool {
         var players = [NSManagedObject]()
         
@@ -31,10 +33,10 @@ class LeaderBoard {
             print("Could not save \(error), \(error.userInfo)")
             return false
         }
-        
         return true
     }
     
+    // Test Method for fetching results from database.
     func printCoreDataforTesting() {
         var players = [NSManagedObject]()
         

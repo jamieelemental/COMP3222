@@ -158,11 +158,11 @@ class SinglePlayerScene: SKScene {
                 
                 if game.hasWon(name, turn: turn) == true {
                     
-                    game.gameWon()
+                    game.gameWon(turn, times: "22.22")
                     
                     // Save to LeaderBoard
-                    leaderBoard.Save("Dan", turns: moveCount, time: "21.22")
-                    leaderBoard.printCoreDataforTesting()
+                    //leaderBoard.Save("Dan", turns: moveCount, time: "21.22")
+                    //leaderBoard.printCoreDataforTesting()
                     
                     
                     let gameScene = SinglePlayerScene(size: self.size)

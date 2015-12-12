@@ -117,6 +117,7 @@
 		7D93332B1C0C59EF007F7861 /* Connect Four Advance */ = {
 			isa = PBXGroup;
 			children = (
+				C2CBDFB61C1C3579008E9E32 /* GameLogic */,
 				7D9333691C0C5F6C007F7861 /* TwoPlayer */,
 				7D9333661C0C5E62007F7861 /* SinglePlayer */,
 				7D93332C1C0C59EF007F7861 /* AppDelegate.swift */,
@@ -151,12 +152,8 @@
 		7D9333661C0C5E62007F7861 /* SinglePlayer */ = {
 			isa = PBXGroup;
 			children = (
-				C2B70AF31C0DEB6900390E48 /* IsValidMove.swift */,
 				C2F409341C0C9B6D00A235A3 /* SinglePlayerViewController.swift */,
 				C2F409361C0C9D8300A235A3 /* SinglePlayerScene.swift */,
-				C2B70AF51C0E0B4C00390E48 /* GameStatus.swift */,
-				C2B70AF71C0E17D900390E48 /* Ai.swift */,
-				C22AB8C21C1B753D00FA76D6 /* LeaderBoard.swift */,
 			);
 			name = SinglePlayer;
 			sourceTree = "<group>";
@@ -169,6 +166,17 @@
 				7DD6DDD01C1A279200D57F7B /* GamePlay.swift */,
 			);
 			name = TwoPlayer;
+			sourceTree = "<group>";
+		};
+		C2CBDFB61C1C3579008E9E32 /* GameLogic */ = {
+			isa = PBXGroup;
+			children = (
+				C2B70AF31C0DEB6900390E48 /* IsValidMove.swift */,
+				C2B70AF51C0E0B4C00390E48 /* GameStatus.swift */,
+				C2B70AF71C0E17D900390E48 /* Ai.swift */,
+				C22AB8C21C1B753D00FA76D6 /* LeaderBoard.swift */,
+			);
+			name = GameLogic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class GameStatus {
     var Player = 0
@@ -19,6 +20,7 @@ class GameStatus {
     var col5count = 0
     var col6count = 0
     var col7count = 0
+    let leaderBoard = LeaderBoard()
     
     // check for a winner in a coloum.
     func CheckCol(array: [[Int]], col: Int) -> String {
@@ -175,12 +177,17 @@ class GameStatus {
     
     
     // Method to finish the game.
-    func gameWon(){
+    func gameWon(name: String, turns: Int,times: String){
         let alert = UIAlertView()
         alert.title = "GameWon"
-        alert.message = " Click to restart"
-        alert.addButtonWithTitle("Ok")
+        alert.message = "You have won"
+        //let textField = alert.textFieldAtIndex(0)
+        alert.addButtonWithTitle("Submit")
         alert.show()
+        
+        // Save to LeaderBoard
+        leaderBoard.Save(name, turns: turns, time: times)
+        leaderBoard.printCoreDataforTesting()
     }
     
     func gameOver(){
@@ -190,7 +197,8 @@ class GameStatus {
         alert.addButtonWithTitle("Ok")
         alert.show()
     }
-    
-    
-    
-}
+
+    }
+
+
+
