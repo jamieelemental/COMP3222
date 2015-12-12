@@ -32,7 +32,7 @@ class TwoPlayerScene: SKScene {
         }
         
         //Iniitalize variables for grid. Some scaled, some not.
-        self.gridLineWidth = shortSide/100
+        self.gridLineWidth = shortSide/200
         self.gridHeight = (shortSide / 100) * 70
         self.gridWidth = gridHeight
         self.colWidth = gridWidth / 7
