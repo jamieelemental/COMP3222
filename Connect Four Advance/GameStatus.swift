@@ -37,7 +37,6 @@ class GameStatus {
                 }
                 prevItem = item
             }
-            
         }
         return "None"
     }
@@ -74,7 +73,6 @@ class GameStatus {
                     if(count == 4){
                         return "won"
                     }
-                    
                 }
             }
         }
@@ -91,14 +89,11 @@ class GameStatus {
                     if(count == 4){
                         return "won"
                     }
-                    
                 }
             }
         }
         return "None"
     }
-    
-    
     
     // Track game status.
     func hasWon(move: String, turn: Int) -> Bool {
@@ -110,7 +105,6 @@ class GameStatus {
         
         switch (move){
         case "buttonFactory1":
-            //board[0].append(turn)
             board[0][col1count] = turn
             result = CheckCol(board, col: 0)
             result2 = CheckRow(board, col: 0,row: col1count)
@@ -168,7 +162,7 @@ class GameStatus {
         return false
     }
     
-    // Method to finish the game.
+    // Method to finish the game with a win.
     func gameWon(name: String, turns: Int,times: String){
         let alert = UIAlertView()
         alert.title = "GameWon"
@@ -180,10 +174,9 @@ class GameStatus {
         let currentTime = CFAbsoluteTimeGetCurrent()
         let gameLength = String(format: "%.2f", currentTime - Double(times)!)
         
-        
         leaderBoard.Save(name, turns: turns, time: gameLength)
     }
-    
+    // Method to finish the game in the event there is no winner.
     func gameOver(){
         let alert = UIAlertView()
         alert.title = "GameOver"
@@ -192,11 +185,7 @@ class GameStatus {
         alert.show()
     }
     
-    func returnBoard() -> [[Int]]{
-        return board
-    }
-    
-    
+    // Method to return a valid move for the AI.
     func returnValidMove() -> String{
         let currentGameStatus: [Int] = [col1count,col2count,col3count,col4count,col5count,col6count,col7count]
         var count = 0
@@ -216,7 +205,6 @@ class GameStatus {
         move = validMoves[randomIndex]
         return move
     }
-    
 }
 
 

@@ -29,11 +29,19 @@ class MenuViewController: UIViewController {
         
     }
     @IBAction func SubmitButton(sender: UIButton) {
-        if TwoPlayerSwitch.on {
+        if TwoPlayerSwitch.on && PlayerOneText.text! != "" && PlayerTwoText.text! != ""{
             performSegueWithIdentifier("TwoPlayer", sender: nil)
         }
-        else {
+        else if !TwoPlayerSwitch.on && PlayerOneText.text! != "" {
             performSegueWithIdentifier("OnePlayer", sender: nil)
+        } else {
+            
+            let alert = UIAlertView()
+            alert.title = "Incorrect Input"
+            alert.message = "Please Enter your name."
+            alert.addButtonWithTitle("Ok")
+            alert.show()
+            
         }
     }
     

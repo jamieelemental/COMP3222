@@ -17,6 +17,7 @@ class IsValidMove {
     var b6Count = 0
     var b7Count = 0
     
+    // Check if a move is valid.
     func checkValid(move: String) -> Bool {
         
         switch (move){
