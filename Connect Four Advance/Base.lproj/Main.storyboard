@@ -104,15 +104,24 @@
                                     <action selector="SubmitButton:" destination="LAZ-h3-7Gb" eventType="touchUpInside" id="QAO-rf-vFg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect Four: Advanced" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCJ-mY-7mt">
+                                <rect key="frame" x="205" y="129" width="190" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DFE-kl-YEA" firstAttribute="trailing" secondItem="Q3V-2T-LaF" secondAttribute="trailing" id="0Eg-Ql-Wyg"/>
                             <constraint firstItem="Q3V-2T-LaF" firstAttribute="trailing" secondItem="Hp3-go-EId" secondAttribute="trailing" id="1mb-ar-hNy"/>
+                            <constraint firstItem="fGT-QN-g7q" firstAttribute="top" secondItem="iCJ-mY-7mt" secondAttribute="bottom" constant="8" symbolic="YES" id="5fC-uK-lh9"/>
                             <constraint firstItem="Mh3-jQ-Dc5" firstAttribute="top" secondItem="Hp3-go-EId" secondAttribute="bottom" constant="8" symbolic="YES" id="9vX-gE-otZ"/>
                             <constraint firstItem="DFE-kl-YEA" firstAttribute="leading" secondItem="Mh3-jQ-Dc5" secondAttribute="leading" id="Bln-oF-xMZ"/>
                             <constraint firstItem="DFE-kl-YEA" firstAttribute="top" secondItem="Q3V-2T-LaF" secondAttribute="bottom" constant="8" symbolic="YES" id="EGY-jb-59J"/>
+                            <constraint firstItem="iCJ-mY-7mt" firstAttribute="centerX" secondItem="fGT-QN-g7q" secondAttribute="centerX" id="G5k-Or-bll"/>
                             <constraint firstItem="DFE-kl-YEA" firstAttribute="top" secondItem="Mh3-jQ-Dc5" secondAttribute="bottom" constant="8" symbolic="YES" id="JqT-hc-OKP"/>
                             <constraint firstItem="fMQ-KA-Cjp" firstAttribute="centerX" secondItem="nSK-Fb-7fi" secondAttribute="centerX" id="OCk-tk-h7y"/>
                             <constraint firstItem="fMQ-KA-Cjp" firstAttribute="top" secondItem="Mh3-jQ-Dc5" secondAttribute="bottom" constant="36" id="TF8-vn-pQm"/>
@@ -197,7 +206,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7M1-sq-qUk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-209" y="1387"/>
+            <point key="canvasLocation" x="-294" y="1412"/>
         </scene>
     </scenes>
 </document>
