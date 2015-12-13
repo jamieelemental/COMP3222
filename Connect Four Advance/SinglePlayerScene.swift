@@ -7,7 +7,6 @@
 //
 
 import SpriteKit
-import AVFoundation
 
 class SinglePlayerScene: SKScene {
     
@@ -79,7 +78,7 @@ class SinglePlayerScene: SKScene {
                 
                 if game.hasWon(col, turn: playerTurn)
                 {
-                    var playerWon = p1
+                    let playerWon = p1
                     
                     game.gameWon("\(playerWon)", turns: moveNo, times: "\(gameStart)")
                     ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
@@ -128,7 +127,7 @@ class SinglePlayerScene: SKScene {
                         let validMoveLocation = self.AI.takeMove(self.game,valid2: self.move,turn: self.playerTurn)  /// Need to use this to postion the node.
                         if self.game.hasWon(validMoveLocation, turn: self.playerTurn)
                         {
-                            var playerWon = self.p2
+                            let playerWon = self.p2
                             
                             self.game.gameWon("\(playerWon)", turns: self.moveNo, times: "\(self.gameStart)")
                             ((self.scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
@@ -140,7 +139,7 @@ class SinglePlayerScene: SKScene {
                         
                         if self.frame.height < self.frame.width { shortSide = self.frame.height}
                         
-                        var padding = (self.frame.width - shortSide * 0.7)/2
+                        let padding = (self.frame.width - shortSide * 0.7)/2
 
                         switch (validMoveLocation){
                         case "buttonFactory1":

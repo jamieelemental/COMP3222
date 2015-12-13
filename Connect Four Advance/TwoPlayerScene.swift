@@ -6,7 +6,6 @@
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
 class TwoPlayerScene: SKScene {

@@ -44,28 +44,19 @@ class TableViewController: UIViewController, UITableViewDataSource{
         
         cell!.textLabel!.text = "\((person.valueForKey("name") as? String)!) - Turns: \((person.valueForKey("turns") as? Int)!)  Time: \((person.valueForKey("time") as? String)!) "
         
-        //print((person.valueForKey("name") as? String)! + " test")
-        
         return cell!
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        //1
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
-        
         let managedContext = appDelegate.managedObjectContext
-        
-        //2
         let fetchRequest = NSFetchRequest(entityName: "Person")
+        let sortDescriptor = NSSortDescriptor(key: "turns", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
-        let sortDescriptors = [sortDescriptor]
-        fetchRequest.sortDescriptors = sortDescriptors
-        
-        //3
         do {
             let results =
             try managedContext.executeFetchRequest(fetchRequest)
