@@ -61,6 +61,10 @@ class TableViewController: UIViewController, UITableViewDataSource{
         //2
         let fetchRequest = NSFetchRequest(entityName: "Person")
         
+        let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = sortDescriptors
+        
         //3
         do {
             let results =
