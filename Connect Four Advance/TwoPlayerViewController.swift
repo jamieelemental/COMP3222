@@ -17,13 +17,15 @@ class TwoPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Two Player loaded")
         
-        let TwoPlay = TwoPlayerScene(size: view.bounds.size)
+        let TwoPlay = TwoPlayerScene(size: view.bounds.size) //Instantiate Scene
+        
+        //Set player Names
         TwoPlay.p1 = player1
         TwoPlay.p2 = player2
         
-        scene = TwoPlay //TwoPlayerScene(size: view.bounds.size)
+        //Set up SKScene
+        scene = TwoPlay
         scene.scaleMode = .AspectFit
         
         // Configure the view.
@@ -31,9 +33,9 @@ class TwoPlayerViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        skView.presentScene(scene)
+        skView.presentScene(scene) //Present the scene within the view.
     }
-       
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning() // Release any cached data, images, etc that aren't in use.
     }
@@ -42,6 +44,7 @@ class TwoPlayerViewController: UIViewController {
         return true
     }
     
+    //On device rotation, set the scene size to the new size, recenter the grid and contents in the scene.
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         
         let newSize =  CGSize(width: view.bounds.width, height: view.bounds.height)
@@ -51,10 +54,12 @@ class TwoPlayerViewController: UIViewController {
         recenterGrid(newSize, old: oldSize)
     }
     
+    //override support for orientations so all are allowed
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return .All
     }
     
+    //centers all the nodes in the scene
     func recenterGrid(new: CGSize, old: CGSize)
     {
         var shortSide = old.width
@@ -64,7 +69,7 @@ class TwoPlayerViewController: UIViewController {
         {
             if let _ = (node as? SKLabelNode)
             {
-                continue
+                continue //Ignore the label nodes as they are aligned differently.
             }
             else
             {

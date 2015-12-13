@@ -10,6 +10,7 @@ import SpriteKit
 
 class SinglePlayerScene: SKScene {
     
+    //Variables
     var shortSide = CGFloat(0)
     var gridLineWidth = CGFloat(0)
     var gridHeight = CGFloat(0)
@@ -61,6 +62,7 @@ class SinglePlayerScene: SKScene {
         addText()
     }
     
+    //Method to generate a counter on touch input, also generates counter for the AI. Checks whether the game has been won, and if move is valid.
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         var shortSide = self.frame.width
@@ -70,7 +72,6 @@ class SinglePlayerScene: SKScene {
             
             let location = CGPoint(x: touch.locationInView(self.view).x, y:(self.frame.height * 0.65)) //Changes Y co-ordinate to top of column
             let col = self.columnName(location) //get column identifier
-            print(col)
             
             if move.checkValid(col){
                 
@@ -81,22 +82,17 @@ class SinglePlayerScene: SKScene {
                     let playerWon = p1
                     
                     game.gameWon("\(playerWon)", turns: moveNo, times: "\(gameStart)")
-                    ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
+                    ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil) //Return to menu screen
                     return
                 }
                 
+                //Change player name colour to indicate turn.
                 if playerTurn == 1 {
                     Node.fillColor = UIColor.yellowColor()
                     pl1.fontColor = UIColor.blackColor()
                     pl2.fontColor = UIColor.blueColor()
                     playerTurn = 2
                 }
-                    
-                //else if playerTurn == 2{
-                //    Node.fillColor = UIColor.redColor()
-                //    playerTurn = 1
-                //    AI.takeMove(game,valid2: move,turn: playerTurn)//////////////////////////////////////////////////
-                //}
                 
                 Node.position = location
                 Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.9, height: Node.frame.width * 0.97))
@@ -110,7 +106,7 @@ class SinglePlayerScene: SKScene {
                 if moveNo >= 42
                 {
                     game.gameOver()
-                    ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
+                    ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil) //Returns to menu screen
                 }
                 moveNo++
                 self.moveLabel.text = "\(moveNo - 1)"
@@ -127,7 +123,7 @@ class SinglePlayerScene: SKScene {
                     if self.playerTurn == 2 {
                         self.pl1.fontColor = UIColor.blueColor()
                         self.pl2.fontColor = UIColor.blackColor()
-               
+                        
                         let Node = SKShapeNode(circleOfRadius: (shortSide * 0.67 / 14))
                         let validMoveLocation = self.AI.takeMove(self.game,valid2: self.move,turn: self.playerTurn)  /// Need to use this to postion the node.
                         if self.game.hasWon(validMoveLocation, turn: self.playerTurn)
@@ -145,7 +141,7 @@ class SinglePlayerScene: SKScene {
                         if self.frame.height < self.frame.width { shortSide = self.frame.height}
                         
                         let padding = (self.frame.width - shortSide * 0.7)/2
-
+                        
                         switch (validMoveLocation){
                         case "buttonFactory1":
                             Node.position = CGPoint(x:(padding + shortSide * 0.051),y:(self.frame.height * 0.65))
@@ -192,6 +188,7 @@ class SinglePlayerScene: SKScene {
         }
     }
     
+    //If the scene changes size (rotation) reposition the player labels, and move count label.
     override func didChangeSize(oldSize: CGSize) {
         pl1.position = CGPoint(x: pl1.frame.width/2 + self.frame.width * 0.05, y: self.frame.height * 0.95)
         pl2.position = CGPoint(x: self.frame.width - pl2.frame.width/2 - self.frame.width * 0.05, y: self.frame.height * 0.95)
@@ -208,7 +205,7 @@ class SinglePlayerScene: SKScene {
         if self.frame.width > self.frame.height { shortSide = self.frame.height }
         
         let paddingSidesWidth = (self.frame.width - shortSide * 0.7) / 2
-        let colWidth = (shortSide/10)  //shortSide/100 * 70 / 7
+        let colWidth = (shortSide/10)
         
         //Gets a column name identifier for each column, based on co-ordinate position.
         switch pixel.x
@@ -239,7 +236,7 @@ class SinglePlayerScene: SKScene {
         }
     }
     
-    
+    //Draws the grid and adds it to the scene
     func drawGrid()
     {
         // Code to create columns
@@ -285,6 +282,8 @@ class SinglePlayerScene: SKScene {
         }
     }
     
+    
+    //Applies the image of the connect4 grid over the top of the grid
     func applyGridOverlay()
     {
         let gameBoard = SKSpriteNode(imageNamed:"grid2")
@@ -297,6 +296,7 @@ class SinglePlayerScene: SKScene {
     }
     
     
+    //Centers the position of each grid line (node)
     func centerGrid()
     {
         for node in self.children
@@ -306,6 +306,7 @@ class SinglePlayerScene: SKScene {
         }
     }
     
+    //Adds the player name labels, and move count label to the scene.
     func addText()
     {
         pl1 = SKLabelNode(text: p1)

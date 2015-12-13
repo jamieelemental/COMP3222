@@ -9,7 +9,6 @@
 import UIKit
 import SpriteKit
 
-
 class SinglePlayerViewController: UIViewController {
     
     var scene = SKScene()
@@ -18,13 +17,15 @@ class SinglePlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Single Player loaded")
         
-        let SinglePlay = SinglePlayerScene(size: view.bounds.size)
+        let SinglePlay = SinglePlayerScene(size: view.bounds.size) //Instantiate scene
+        
+        //Set player names
         SinglePlay.p1 = player1
         SinglePlay.p2 = player2
         
-        scene = SinglePlay //TwoPlayerScene(size: view.bounds.size)
+        //Set up SKScene
+        scene = SinglePlay
         scene.scaleMode = .AspectFit
         
         // Configure the view.
@@ -32,7 +33,7 @@ class SinglePlayerViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        skView.presentScene(scene)
+        skView.presentScene(scene) //Present the scene within the view
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,6 +44,7 @@ class SinglePlayerViewController: UIViewController {
         return true
     }
     
+    //On device rotation, set the scene size to the new size, recenter the grid and contents in the scene.
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         
         let newSize =  CGSize(width: view.bounds.width, height: view.bounds.height)
@@ -52,10 +54,12 @@ class SinglePlayerViewController: UIViewController {
         recenterGrid(newSize, old: oldSize)
     }
     
+    //override support for all orientations so all are allowed
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return .All
     }
     
+    //centers all the nodes in the scene
     func recenterGrid(new: CGSize, old: CGSize)
     {
         var shortSide = old.width
@@ -65,7 +69,7 @@ class SinglePlayerViewController: UIViewController {
         {
             if let _ = (node as? SKLabelNode)
             {
-                continue
+                continue //Ignore the label nodes as they are aligned differently
             }
             else
             {

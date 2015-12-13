@@ -26,7 +26,7 @@ class IsValidMove {
             if b1Count < 7 {
                 return true
             } else {
-            return false
+                return false
             }
         case "buttonFactory2":
             b2Count = b2Count + 1

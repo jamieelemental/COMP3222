@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
-    <entity name="Person" syncable="YES">
+    <entity name="LeaderboardStore" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="turns" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Person" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="LeaderboardStore" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

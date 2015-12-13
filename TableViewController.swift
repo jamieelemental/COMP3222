@@ -11,63 +11,62 @@ import CoreData
 
 class TableViewController: UIViewController, UITableViewDataSource{
     
+    var leaders = [NSManagedObject]()
+    
+    // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    
+    // MARK: Actions
     @IBAction func backToHome(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
-    
-    var people = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "\"This List\""
-        tableView.registerClass(UITableViewCell.self,
-            forCellReuseIdentifier: "Cell")
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
-
+    //Returns count of leaders
     func tableView(tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
-        return people.count
+            return leaders.count
     }
     
     
-    func tableView(tableView: UITableView,
-        cellForRowAtIndexPath
-        indexPath: NSIndexPath) -> UITableViewCell {
+    //Runs for each row, adding player details
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
-
-        let person = people[indexPath.row]
         
-        cell!.textLabel!.text = "\((person.valueForKey("name") as? String)!) - Turns: \((person.valueForKey("turns") as? Int)!)  Time: \((person.valueForKey("time") as? String)!) "
+        let player = leaders[indexPath.row]
+        
+        cell!.textLabel!.text = "\((player.valueForKey("name") as? String)!) - Turns: \((player.valueForKey("turns") as? Int)!)  Time: \((player.valueForKey("time") as? String)!) "
         
         return cell!
     }
     
+    //Gets data from CoreData and displays it in table view
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Person")
+        let fetchRequest = NSFetchRequest(entityName: "LeaderboardStore")
         let sortDescriptor = NSSortDescriptor(key: "turns", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         fetchRequest.fetchLimit = 10
         
         do {
-            let results =
-            try managedContext.executeFetchRequest(fetchRequest)
-            people = results as! [NSManagedObject]
-        } catch let error as NSError {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            leaders = results as! [NSManagedObject]
+        }
+        catch let error as NSError
+        {
             print("Could not fetch \(error), \(error.userInfo)")
         }
     }
-    
-    
 }
 
 

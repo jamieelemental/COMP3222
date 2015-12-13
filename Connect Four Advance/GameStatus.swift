@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SpriteKit
 
 class GameStatus {
     var Player = 0
