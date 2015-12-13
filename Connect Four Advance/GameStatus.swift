@@ -50,20 +50,20 @@ class GameStatus {
         var item = 5
         var count = 1
         var i = 0
-            for (i = 0; i < array.count; i++){
-                item = array[i][row]
-                if(prevItem == item && prevItem != 0){
-                    count++
-                    if count == 4{
-                        return "won"
-                    }
-                } else {
-                    count = 1
+        for (i = 0; i < array.count; i++){
+            item = array[i][row]
+            if(prevItem == item && prevItem != 0){
+                count++
+                if count == 4{
+                    return "won"
                 }
-                prevItem = item
+            } else {
+                count = 1
             }
-        return "None"
+            prevItem = item
         }
+        return "None"
+    }
     
     // check for a winner in diagonal left to right.
     func CheckDiaLR(array: [[Int]], col: Int, row: Int) -> String {
@@ -98,7 +98,7 @@ class GameStatus {
         }
         return "None"
     }
-
+    
     
     
     // Track game status.
@@ -185,7 +185,11 @@ class GameStatus {
         alert.show()
         
         // Save to LeaderBoard
-        leaderBoard.Save(name, turns: turns, time: times)
+        let currentTime = CFAbsoluteTimeGetCurrent()
+        let gameLength = String(currentTime - Double(times)!)
+        
+        
+        leaderBoard.Save(name, turns: turns, time: gameLength)
         leaderBoard.printCoreDataforTesting()
     }
     
@@ -196,8 +200,9 @@ class GameStatus {
         alert.addButtonWithTitle("Ok")
         alert.show()
     }
+    
+}
 
-    }
 
 
 

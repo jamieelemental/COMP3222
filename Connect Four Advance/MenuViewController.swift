@@ -58,6 +58,9 @@ class MenuViewController: UIViewController {
             let vc = segue.destinationViewController as? TwoPlayerViewController
             vc?.player1 = PlayerOneText.text!
             vc?.player2 = PlayerTwoText.text!
+        } else {
+            let vc = segue.destinationViewController as? SinglePlayerViewController
+            vc?.player1 = PlayerOneText.text!
         }
     }
 }
