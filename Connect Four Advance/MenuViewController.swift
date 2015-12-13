@@ -39,7 +39,13 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap"))//Creates a Tap Gesture, referencing a function to call when a tap is detected.
+        view.addGestureRecognizer(tap) //Adds tap gesture to the view.
+    }
+    
+    func handleTap()
+    {
+        self.view.endEditing(true) //Dismiss keyboard.
     }
 
     override func didReceiveMemoryWarning() {
