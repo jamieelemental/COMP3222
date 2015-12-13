@@ -97,7 +97,7 @@ class SinglePlayerScene: SKScene {
                 //}
                 
                 Node.position = location
-                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.97, height: Node.frame.width * 0.97))
+                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.9, height: Node.frame.width * 0.97))
                 Node.physicsBody?.friction = 0
                 Node.physicsBody?.restitution = 0.1
                 Node.physicsBody?.allowsRotation = false
@@ -143,25 +143,25 @@ class SinglePlayerScene: SKScene {
 
                         switch (validMoveLocation){
                         case "buttonFactory1":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.05),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.051),y:(self.frame.height * 0.65))
                         case "buttonFactory2":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.15),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.151),y:(self.frame.height * 0.65))
                         case "buttonFactory3":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.25),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.251),y:(self.frame.height * 0.65))
                         case "buttonFactory4":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.35),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.351),y:(self.frame.height * 0.65))
                         case "buttonFactory5":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.45),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.451),y:(self.frame.height * 0.65))
                         case "buttonFactory6":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.55),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.551),y:(self.frame.height * 0.65))
                         case "buttonFactory7":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.65),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.651),y:(self.frame.height * 0.65))
                         default:
                             return
                         }
                         
                         //Node.position = location
-                        Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.97, height: Node.frame.width * 0.97))
+                        Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.9, height: Node.frame.width * 0.97))
                         Node.physicsBody?.friction = 0
                         Node.physicsBody?.restitution = 0.1
                         Node.physicsBody?.allowsRotation = false

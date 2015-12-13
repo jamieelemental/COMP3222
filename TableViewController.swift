@@ -56,6 +56,7 @@ class TableViewController: UIViewController, UITableViewDataSource{
         let fetchRequest = NSFetchRequest(entityName: "Person")
         let sortDescriptor = NSSortDescriptor(key: "turns", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.fetchLimit = 10
         
         do {
             let results =

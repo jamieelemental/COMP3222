@@ -198,7 +198,7 @@ class GameStatus {
     
     
     func returnValidMove() -> String{
-        var currentGameStatus: [Int] = [col1count,col2count,col3count,col4count,col5count,col6count,col7count]
+        let currentGameStatus: [Int] = [col1count,col2count,col3count,col4count,col5count,col6count,col7count]
         var count = 0
         var move = ""
         var validMoves: [String] = []

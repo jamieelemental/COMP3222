@@ -95,7 +95,7 @@ class TwoPlayerScene: SKScene {
                 }
                 
                 Node.position = location
-                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.97, height: Node.frame.width * 0.97))
+                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.90, height: Node.frame.width * 0.97))
                 Node.physicsBody?.friction = 0
                 Node.physicsBody?.restitution = 0.1
                 Node.physicsBody?.allowsRotation = false
