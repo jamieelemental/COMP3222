@@ -6,12 +6,10 @@
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
-import Foundation
 import CoreData
 import UIKit
 
 class LeaderBoard {
-    
     
     // Method for saving Users to database.
     func Save(name: String, turns: Int, time: String) -> Bool {
@@ -35,5 +33,5 @@ class LeaderBoard {
         }
         return true
     }
-
+    
 }

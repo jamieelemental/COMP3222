@@ -6,7 +6,6 @@
 //  Copyright © 2015 DanAndJamie. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import SpriteKit
 
@@ -102,7 +101,6 @@ class GameStatus {
     
     
     // Track game status.
-    
     func hasWon(move: String, turn: Int) -> Bool {
         Player = turn
         var result = ""
@@ -170,8 +168,6 @@ class GameStatus {
         return false
     }
     
-    
-    
     // Method to finish the game.
     func gameWon(name: String, turns: Int,times: String){
         let alert = UIAlertView()
@@ -202,7 +198,7 @@ class GameStatus {
     
     
     func returnValidMove() -> String{
-        var currentGameStatus: [Int] = [col1count,col2count,col3count,col4count,col5count,col6count,col7count]
+        let currentGameStatus: [Int] = [col1count,col2count,col3count,col4count,col5count,col6count,col7count]
         var count = 0
         var move = ""
         var validMoves: [String] = []

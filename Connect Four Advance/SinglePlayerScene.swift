@@ -7,7 +7,6 @@
 //
 
 import SpriteKit
-import AVFoundation
 
 class SinglePlayerScene: SKScene {
     
@@ -79,7 +78,7 @@ class SinglePlayerScene: SKScene {
                 
                 if game.hasWon(col, turn: playerTurn)
                 {
-                    var playerWon = p1
+                    let playerWon = p1
                     
                     game.gameWon("\(playerWon)", turns: moveNo, times: "\(gameStart)")
                     ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
@@ -98,7 +97,7 @@ class SinglePlayerScene: SKScene {
                 //}
                 
                 Node.position = location
-                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.97, height: Node.frame.width * 0.97))
+                Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.9, height: Node.frame.width * 0.97))
                 Node.physicsBody?.friction = 0
                 Node.physicsBody?.restitution = 0.1
                 Node.physicsBody?.allowsRotation = false
@@ -128,7 +127,7 @@ class SinglePlayerScene: SKScene {
                         let validMoveLocation = self.AI.takeMove(self.game,valid2: self.move,turn: self.playerTurn)  /// Need to use this to postion the node.
                         if self.game.hasWon(validMoveLocation, turn: self.playerTurn)
                         {
-                            var playerWon = self.p2
+                            let playerWon = self.p2
                             
                             self.game.gameWon("\(playerWon)", turns: self.moveNo, times: "\(self.gameStart)")
                             ((self.scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
@@ -140,29 +139,29 @@ class SinglePlayerScene: SKScene {
                         
                         if self.frame.height < self.frame.width { shortSide = self.frame.height}
                         
-                        var padding = (self.frame.width - shortSide * 0.7)/2
+                        let padding = (self.frame.width - shortSide * 0.7)/2
 
                         switch (validMoveLocation){
                         case "buttonFactory1":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.05),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.051),y:(self.frame.height * 0.65))
                         case "buttonFactory2":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.15),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.151),y:(self.frame.height * 0.65))
                         case "buttonFactory3":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.25),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.251),y:(self.frame.height * 0.65))
                         case "buttonFactory4":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.35),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.351),y:(self.frame.height * 0.65))
                         case "buttonFactory5":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.45),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.451),y:(self.frame.height * 0.65))
                         case "buttonFactory6":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.55),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.551),y:(self.frame.height * 0.65))
                         case "buttonFactory7":
-                            Node.position = CGPoint(x:(padding + shortSide * 0.65),y:(self.frame.height * 0.65))
+                            Node.position = CGPoint(x:(padding + shortSide * 0.651),y:(self.frame.height * 0.65))
                         default:
                             return
                         }
                         
                         //Node.position = location
-                        Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.97, height: Node.frame.width * 0.97))
+                        Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.9, height: Node.frame.width * 0.97))
                         Node.physicsBody?.friction = 0
                         Node.physicsBody?.restitution = 0.1
                         Node.physicsBody?.allowsRotation = false
