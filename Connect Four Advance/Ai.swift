@@ -11,10 +11,15 @@ import SpriteKit
 
 class Ai {
     
-    func takeMove(Game: SKScene) -> String {
-        var moves: [String] = ["buttonFactory1","buttonFactory2","buttonFactory3","buttonFactory4","buttonFactory5","buttonFactory6","buttonFactory7"]
+    func takeMove(valid: GameStatus,valid2: IsValidMove, turn: Int) -> String {
         
-        return ""
+        var validMove = valid.returnValidMove()
+        //valid.hasWon(validMove, turn: turn)
+        valid2.checkValid(validMove)
+        
+        print("ValidMove: ", validMove)
+        
+        return validMove
     }
     
     
