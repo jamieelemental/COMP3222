@@ -35,30 +35,5 @@ class LeaderBoard {
         }
         return true
     }
-    
-    // Test Method for fetching results from database.
-    func printCoreDataforTesting() {
-        var players = [NSManagedObject]()
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Person")
-        
-        do {
-            let results =
-            try managedContext.executeFetchRequest(fetchRequest)
-            players = results as! [NSManagedObject]
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-        
-        print("Database Size: ",players.count)
-        
-        for index in players {
-            print(index.valueForKey("name") as! String)
-            print(index.valueForKey("turns") as! Int)
-            print(index.valueForKey("time") as! String)
-            
-        }
-    }
+
 }

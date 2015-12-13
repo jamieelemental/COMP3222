@@ -176,7 +176,7 @@ class GameStatus {
     func gameWon(name: String, turns: Int,times: String){
         let alert = UIAlertView()
         alert.title = "GameWon"
-        alert.message = "You have won  \(name)"
+        alert.message = "You have won \(name)"
         alert.addButtonWithTitle("Submit")
         alert.show()
         
@@ -186,7 +186,6 @@ class GameStatus {
         
         
         leaderBoard.Save(name, turns: turns, time: gameLength)
-        leaderBoard.printCoreDataforTesting()
     }
     
     func gameOver(){

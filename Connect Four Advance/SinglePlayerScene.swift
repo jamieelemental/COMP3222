@@ -83,6 +83,7 @@ class SinglePlayerScene: SKScene {
                     
                     game.gameWon("\(playerWon)", turns: moveNo, times: "\(gameStart)")
                     ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
+                    return
                 }
                 
                 if playerTurn == 1 {
