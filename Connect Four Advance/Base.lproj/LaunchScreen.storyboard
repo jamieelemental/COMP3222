@@ -17,9 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daniel Nuttall and Jamie Element Present" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnu-4u-oqo">
-                                <rect key="frame" x="143" y="289" width="315" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daniel Nuttall and Jamie Element Present" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnu-4u-oqo">
+                                <rect key="frame" x="167" y="271" width="266" height="58"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="266" id="yhP-aP-23q"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -28,8 +31,9 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jnu-4u-oqo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Qf7-gv-nrQ"/>
-                            <constraint firstItem="jnu-4u-oqo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="dDw-UO-3wS"/>
+                            <constraint firstItem="jnu-4u-oqo" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="251" id="C27-mK-9d1"/>
+                            <constraint firstItem="jnu-4u-oqo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="J3X-q3-3q0"/>
+                            <constraint firstItem="jnu-4u-oqo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="w2K-3v-g8H"/>
                         </constraints>
                     </view>
                 </viewController>
