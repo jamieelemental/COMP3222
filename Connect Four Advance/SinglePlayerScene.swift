@@ -161,7 +161,6 @@ class SinglePlayerScene: SKScene {
                             return
                         }
                         
-                        //Node.position = location
                         Node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: Node.frame.width * 0.9, height: Node.frame.width * 0.97))
                         Node.physicsBody?.friction = 0
                         Node.physicsBody?.restitution = 0.1
