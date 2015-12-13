@@ -113,7 +113,7 @@ class SinglePlayerScene: SKScene {
                 moveNo++
                 self.moveLabel.text = "\(moveNo - 1)"
                 
-                touch.view!.userInteractionEnabled = false // disable user interaction while work is carried out.
+                self.view!.userInteractionEnabled = false // disable user interaction while work is carried out.
                 
                 
                 let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
