@@ -164,10 +164,6 @@ class GameStatus {
         default: break
         }
         
-        //print("ResultCol: ",result)
-        //print("ResultRow: ",result)
-        //print("GAME: ",board)
-        
         if (result == "won"||result2 == "won"||result3 == "won"||result4 == "won"){
             return true
         }
@@ -186,7 +182,7 @@ class GameStatus {
         
         // Save to LeaderBoard
         let currentTime = CFAbsoluteTimeGetCurrent()
-        let gameLength = String(currentTime - Double(times)!)
+        let gameLength = String(format: "%.2f", currentTime - Double(times)!)
         
         
         leaderBoard.Save(name, turns: turns, time: gameLength)
@@ -210,18 +206,20 @@ class GameStatus {
         var currentGameStatus: [Int] = [col1count,col2count,col3count,col4count,col5count,col6count,col7count]
         var count = 0
         var move = ""
+        var validMoves: [String] = []
         for index in currentGameStatus {
             print("Col: ", index)
             if index < 6 {
                 count++
                 move = "buttonFactory\(count)"
-                return move
+                validMoves.append("buttonFactory\(count)")
             } else {
                 count++
             }
-            
         }
-        return "NoValidMove"
+        let randomIndex = Int(arc4random_uniform(UInt32(validMoves.count)))
+        move = validMoves[randomIndex]
+        return move
     }
     
 }

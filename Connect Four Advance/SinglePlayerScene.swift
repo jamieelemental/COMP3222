@@ -80,7 +80,6 @@ class SinglePlayerScene: SKScene {
                 if game.hasWon(col, turn: playerTurn)
                 {
                     var playerWon = p1
-                    if playerTurn == 2 { playerWon = p2 }
                     
                     game.gameWon("\(playerWon)", turns: moveNo, times: "\(gameStart)")
                     ((scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
@@ -128,8 +127,7 @@ class SinglePlayerScene: SKScene {
                         let validMoveLocation = self.AI.takeMove(self.game,valid2: self.move,turn: self.playerTurn)  /// Need to use this to postion the node.
                         if self.game.hasWon(validMoveLocation, turn: self.playerTurn)
                         {
-                            var playerWon = self.p1
-                            if self.playerTurn == 2 { playerWon = self.p2 }
+                            var playerWon = self.p2
                             
                             self.game.gameWon("\(playerWon)", turns: self.moveNo, times: "\(self.gameStart)")
                             ((self.scene!.view!.window?.rootViewController!)! as UIViewController).dismissViewControllerAnimated(true, completion: nil)
