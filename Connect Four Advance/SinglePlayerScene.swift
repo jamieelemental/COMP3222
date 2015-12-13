@@ -87,6 +87,8 @@ class SinglePlayerScene: SKScene {
                 
                 if playerTurn == 1 {
                     Node.fillColor = UIColor.yellowColor()
+                    pl1.fontColor = UIColor.blackColor()
+                    pl2.fontColor = UIColor.blueColor()
                     playerTurn = 2
                 }
                     
@@ -123,6 +125,9 @@ class SinglePlayerScene: SKScene {
                     
                     
                     if self.playerTurn == 2 {
+                        self.pl1.fontColor = UIColor.blueColor()
+                        self.pl2.fontColor = UIColor.blackColor()
+               
                         let Node = SKShapeNode(circleOfRadius: (shortSide * 0.67 / 14))
                         let validMoveLocation = self.AI.takeMove(self.game,valid2: self.move,turn: self.playerTurn)  /// Need to use this to postion the node.
                         if self.game.hasWon(validMoveLocation, turn: self.playerTurn)
@@ -307,7 +312,7 @@ class SinglePlayerScene: SKScene {
         pl1.position = CGPoint(x: pl1.frame.width/2 + self.frame.width * 0.05, y: self.frame.height * 0.95)
         pl1.fontSize = 24
         pl1.color = UIColor.blackColor()
-        pl1.fontColor = UIColor.blackColor()
+        pl1.fontColor = UIColor.blueColor()
         pl1.zPosition = 4.0
         self.addChild(pl1)
         

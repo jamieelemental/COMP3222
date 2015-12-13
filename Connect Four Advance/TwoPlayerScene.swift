@@ -88,14 +88,14 @@ class TwoPlayerScene: SKScene {
                     Node.fillColor = UIColor.yellowColor()
                    
                     pl1.fontColor = UIColor.blackColor()
-                    pl2.fontColor = UIColor.redColor()
+                    pl2.fontColor = UIColor.blueColor()
                     playerTurn = 2
                 }
                     
                 else if playerTurn == 2{
                     Node.fillColor = UIColor.redColor()
                     
-                    pl1.fontColor = UIColor.yellowColor()
+                    pl1.fontColor = UIColor.blueColor()
                     pl2.fontColor = UIColor.blackColor()
                     playerTurn = 1
                 }
@@ -239,7 +239,7 @@ class TwoPlayerScene: SKScene {
         pl1.position = CGPoint(x: pl1.frame.width/2 + self.frame.width * 0.05, y: self.frame.height * 0.95)
         pl1.fontSize = 24
         pl1.color = UIColor.blackColor()
-        pl1.fontColor = UIColor.blackColor()
+        pl1.fontColor = UIColor.blueColor()
         pl1.zPosition = 4.0
         self.addChild(pl1)
         
