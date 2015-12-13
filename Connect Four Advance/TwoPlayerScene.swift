@@ -87,11 +87,17 @@ class TwoPlayerScene: SKScene {
                 
                 if playerTurn == 1 {
                     Node.fillColor = UIColor.yellowColor()
+                   
+                    pl1.fontColor = UIColor.blackColor()
+                    pl2.fontColor = UIColor.redColor()
                     playerTurn = 2
                 }
                     
                 else if playerTurn == 2{
                     Node.fillColor = UIColor.redColor()
+                    
+                    pl1.fontColor = UIColor.yellowColor()
+                    pl2.fontColor = UIColor.blackColor()
                     playerTurn = 1
                 }
                 
